@@ -631,9 +631,9 @@
             });
         });
 
-        // Ejecución inicial y bucle cada 2 minutos
+        // Ejecución inicial y bucle cada 5 minutos
         connectAndFetch();
-        setInterval(connectAndFetch, 120000);
+        setInterval(connectAndFetch, 300000);
 
         // --- PARTÍCULAS ---
         const particleScript = document.createElement('script');
