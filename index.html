@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psicosofia | Hub de Conocimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #010204;
+            --accent: #7c3aed;
+        }
+
+        *,
+        *::before,
+        *::after {
+            cursor: none !important;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(0, 212, 255, 0.3) 0%, transparent 60%),
+                linear-gradient(135deg, #020408 0%, #050814 100%);
+            background-size: 200% 200%;
+            animation: backgroundShift 15s ease infinite;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: orbFloat 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(-10%, -10%) scale(1);
+            }
+
+            100% {
+                transform: translate(110%, 110%) scale(1.5);
+            }
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .image-logo {
+            margin-top: 100px;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        #cursor-aura {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+        }
+
+        .dynamic-text {
+            background: linear-gradient(90deg, #fff, #a78bfa, #00d4ff, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textFlow 4s linear infinite;
+        }
+
+        @keyframes textFlow {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Clase estética nueva añadida */
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            transition: 0.4s;
+            border-radius: 40px;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        #cursor-label {
+            position: fixed;
+            background: rgba(124, 58, 237, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(20px, -50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Terminal Modal & Liquid Glass */
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(7, 7, 7, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #terminal-modal {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #terminal-modal.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .stats-glass-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-glass-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(124, 58, 237, 0.1);
+        }
+
+        .stats-glass-card:hover::after {
+            opacity: 1;
+        }
+
+        .stats-glass-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Parallax & Visuals */
+        .parallax-element {
+            will-change: transform;
+            transition: transform 0.1s cubic-bezier(0, 0, 0, 1);
+        }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .section-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dimension-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .dimension-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(124, 58, 237, 0.4);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .dimension-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        .dimension-card:hover img {
+            opacity: 1;
+        }
+
+        .terminal-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 45px;
+            height: 45px;
+            background: rgba(124, 58, 237, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: 0.3s;
+            color: #7c3aed;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .terminal-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(124, 58, 237, 0.4);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="custom-cursor"></div>
+    <div id="cursor-aura"></div>
+    <div id="cursor-label"></div>
+    <div class="bg-canvas"></div>
+    <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
+    <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
+    <div id="particles-js"></div>
+
+
+    <nav
+        class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5">
+        <div class="flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full p-1 bg-gradient-to-tr from-violet-600 to-cyan-400">
+                <img src="https://cdn.discordapp.com/icons/1233999708578516992/a_a0877c77afbe06c5beef87f4a45fabf7.gif"
+                    alt="Logo" class="w-full h-full object-cover rounded-full border-2 border-black">
+            </div>
+            <span
+                class="text-2xl font-black font-heading tracking-tighter uppercase italic group-hover:text-violet-400 transition-colors">Psicosofia</span>
+        </div>
+
+        <div
+            class="hidden lg:flex items-center space-x-12 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
+            <a href="#inicio" class="hover:text-white transition-all">Sincronía</a>
+            <a href="#pilares" class="hover:text-white transition-all">Puntos de Enlace</a>
+            <a href="#dimensiones" class="hover:text-white transition-all">Dimensiones</a>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div
+                class="hidden md:flex items-center bg-white/5 px-4 py-2 rounded-full border border-white/10 text-[10px] font-bold tracking-widest">
+                <div id="status-indicator" class="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-[0_0_10px_#22c55e]">
+                </div>
+                <span id="online-counter">CONECTANDO...</span>
+            </div>
+            <a href="https://disboard.org/es/server/join/1233999708578516992"
+                class="discord-link bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
+                Entrar
+            </a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+
+        <div
+            class="image-logo w-32 h-32 md:w-56 md:h-56 rounded-full p-1.5 bg-gradient-to-br from-violet-500 via-white to-cyan-400 shadow-[0_0_120px_rgba(124,58,237,0.5)] mb-[15px] animate-bounce-slow">
+            <img src="https://cdn.discordapp.com/icons/1233999708578516992/a_a0877c77afbe06c5beef87f4a45fabf7.gif"
+                class="w-full h-full object-cover rounded-full bg-black">
+        </div>
+
+        <h1 class="text-7xl md:text-[9rem] font-black font-heading leading-none tracking-tighter mb-12">
+            <span class="dynamic-text block">PIENSA.</span>
+            <span class="dynamic-text block">CONECTA.</span>
+        </h1>
+
+        <p class="max-w-xl text-lg text-gray-300 font-light leading-relaxed mb-12">
+            La frontera final entre la <span class="text-violet-400">psique</span> y la <span
+                class="text-cyan-400">evolución digital</span>.
+        </p>
+
+        <div class="stats-glass-card p-8 rounded-[40px] flex flex-col md:flex-row items-center gap-10">
+            <div id="user-avatars" class="flex -space-x-4 items-center pl-2">
+            </div>
+            <div class="text-left border-l border-white/10 pl-10">
+                <div class="flex items-baseline gap-3">
+                    <span id="total-humans" class="text-6xl font-black tracking-tighter text-white">0</span>
+                    <span class="text-violet-400 font-bold text-sm uppercase tracking-[0.2em]">miembros</span>
+                </div>
+                <div class="flex gap-6 mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                    <span>Bots: <b id="total-bots" class="text-white">...</b></span>
+                    <span>Boost: <b id="boost-lvl" class="text-white">...</b></span>
+                    <span>Status: <b id="db-status" class="text-green-500">Live</b></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pilares" class="py-32 container mx-auto px-6">
+        <h2 class="text-4xl font-black mb-16 text-center tracking-widest uppercase opacity-20">Puntos de Enlace</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <a href="#psicologia" class="pillar-card p-12 rounded-[50px] stats-glass-card group block">
+                <div
+                    class="text-violet-500 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                    01</div>
+                <h3 class="text-3xl font-bold mb-6 font-heading">Bienestar</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Psicología, apoyo y equilibrio mental.</p>
+            </a>
+            <a href="#filosofia" class="pillar-card p-12 rounded-[50px] stats-glass-card group block">
+                <div
+                    class="text-cyan-400 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                    02</div>
+                <h3 class="text-3xl font-bold mb-6 font-heading">Sabiduría</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Filosofía, reflexión y debate ético.</p>
+            </a>
+            <a href="#letras" class="pillar-card p-12 rounded-[50px] stats-glass-card group block">
+                <div
+                    class="text-white text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                    03</div>
+                <h3 class="text-3xl font-bold mb-6 font-heading">Expresión</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Literatura, poesía y oratoria libre.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="dimensiones" class="py-32 container mx-auto px-6">
+        <div class="mb-20 text-center">
+            <h2 class="text-6xl font-black font-heading mb-6 tracking-tighter">DIMENSIONES</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Un espacio enriquecedor activo y hecho a medida para todo amante
+                y/o estudiante de las ciencias y las humanidades.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <!-- Psicología -->
+            <div id="psicologia" class="dimension-card p-8 rounded-[40px] section-reveal">
+                <img src="psychology.png" alt="Psicología" class="parallax-element" data-parallax="0.03">
+                <h3 class="text-2xl font-bold font-heading text-violet-400">Psicología</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Canales dedicados a los traumas, trastornos, terapia y el cerebro. Un espacio de escucha ante la
+                    adversidad.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-violet-500/10 text-violet-400 px-3 py-1 rounded-full border border-violet-500/20 uppercase font-bold tracking-widest">Terapia</span>
+                </div>
+            </div>
+
+            <!-- Filosofía -->
+            <div id="filosofia" class="dimension-card p-8 rounded-[40px] section-reveal">
+                <img src="philosophy.png" alt="Filosofía" class="parallax-element" data-parallax="-0.02">
+                <h3 class="text-2xl font-bold font-heading text-cyan-400">Filosofía</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Espacios para la reflexión profunda, divulgación y el aprendizaje. Exploramos la arquitectura del
+                    pensamiento.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-400/20 uppercase font-bold tracking-widest">Ética</span>
+                </div>
+            </div>
+
+            <!-- Debate -->
+            <div id="debate" class="dimension-card p-8 rounded-[40px] section-reveal">
+                <img src="debate.png" alt="Debate" class="parallax-element" data-parallax="0.04">
+                <h3 class="text-2xl font-bold font-heading text-white">Debate</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Infinidad de debates abiertos y eventos en voz. Velamos por la libertad de expresión y la prudencia.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-white/5 text-gray-300 px-3 py-1 rounded-full border border-white/10 uppercase font-bold tracking-widest">Oratoria</span>
+                </div>
+            </div>
+
+            <!-- Lectura -->
+            <div id="letras" class="dimension-card p-8 rounded-[40px] section-reveal">
+                <div class="h-[200px] bg-white/5 rounded-[20px] flex items-center justify-center border border-white/5">
+                    <span class="text-4xl">📜</span>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-violet-400">Lectura y Escritura</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Biblioteca, poesía y talleres. Compartimos libros y poemas para divulgar conocimientos bellos.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-violet-500/10 text-violet-400 px-3 py-1 rounded-full border border-violet-500/20 uppercase font-bold tracking-widest">Letras</span>
+                </div>
+            </div>
+
+            <!-- Ocio -->
+            <div id="ocio" class="dimension-card p-8 rounded-[40px] section-reveal">
+                <img src="chess.png" alt="Ajedrez" class="parallax-element" data-parallax="-0.03">
+                <h3 class="text-2xl font-bold font-heading text-cyan-400">Ajedrez y Ocio</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Torneos de ajedrez, películas y llamadas grupales periódicas. El ocio inteligente como crecimiento.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-400/20 uppercase font-bold tracking-widest">Torneos</span>
+                </div>
+            </div>
+
+            <!-- Comunidad -->
+            <div class="dimension-card p-8 rounded-[40px] bg-white/5 section-reveal">
+                <div class="h-[200px] flex items-center justify-center">
+                    <span class="text-6xl animate-pulse">🤝</span>
+                </div>
+                <h3 class="text-2xl font-bold font-heading text-white">Comunidad</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    No somos terapeutas, pero somos personas dispuestas a escucharte y comprenderte.
+                </p>
+                <div class="mt-auto pt-6 flex flex-wrap gap-2">
+                    <span
+                        class="text-[10px] bg-white/10 text-white px-3 py-1 rounded-full border border-white/20 uppercase font-bold tracking-widest">Respeto</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Botón Terminal -->
+    <div class="terminal-btn" onclick="toggleTerminal()">
+        <span>&gt;_</span>
+    </div>
+
+    <!-- Modal Terminal -->
+    <div id="terminal-modal"
+        class="fixed inset-0 z-[2000] flex items-center justify-center p-6 bg-black/40 backdrop-blur-sm">
+        <div class="liquid-glass w-full max-w-2xl rounded-[40px] p-8">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 bg-violet-500 rounded-full animate-pulse"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-violet-400">System Core
+                        Console</span>
+                </div>
+                <button onclick="toggleTerminal()"
+                    class="text-gray-500 hover:text-white transition-colors text-xs uppercase font-bold tracking-widest">Cerrar</button>
+            </div>
+            <div id="terminal"
+                class="bg-black/40 rounded-3xl p-6 font-mono text-[11px] text-gray-400 h-80 overflow-y-auto border border-white/5 custom-scrollbar">
+                <p class="text-violet-400">[SISTEMA] Inicializando protocolo de enlace...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURACIÓN DE DESPLIEGUE ---
+        // Si despliegas el backend en Render/Railway, pon aquí la URL (ej: 'https://mi-backend.onrender.com')
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? ''
+            : 'https://TU-BACKEND-AQUI.onrender.com';
+
+        const SERVER_ID = "1233999708578516992";
+        let cachedBots = [];
+
+        async function connectAndFetch() {
+            try {
+                // Cargar listado de bots si aún no se ha hecho
+                if (cachedBots.length === 0) {
+                    const botRes = await fetch('bots.json');
+                    cachedBots = await botRes.json();
+                }
+
+                // 1. Obtener datos de Discord (Online Humanos) directamente desde el Widget API
+                const discordResponse = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
+                const discordData = await discordResponse.json();
+                const onlineNow = discordData.presence_count || 0;
+
+                // Actualizar contador online en el Nav
+                document.getElementById('online-counter').innerText = `${onlineNow} PERSONAS ONLINE`;
+
+                // 2. Obtener datos de MongoDB desde nuestro puente
+                const response = await fetch(`${API_URL}/api/stats`);
+                if (!response.ok) throw new Error('Error al conectar con la API');
+
+                const stats = await response.json();
+
+                if (stats && (stats.type === "server_stats" || stats._id)) {
+                    document.getElementById('total-humans').innerText = stats.totalHumans || 0;
+                    document.getElementById('total-bots').innerText = stats.totalBots || 0;
+                    document.getElementById('boost-lvl').innerText = `LVL ${stats.boostLevel || 0}`;
+
+                    // Actualización de estado visual
+                    const statusElem = document.getElementById('db-status');
+                    statusElem.innerText = "Sync"; // Usamos 'Sync' por estética nueva
+                    statusElem.classList.remove('text-red-500');
+                    statusElem.classList.add('text-green-500');
+
+                    // Indicador Visual Nav (Punto Verde)
+                    const indicator = document.getElementById('status-indicator');
+                    indicator.classList.remove('bg-red-500', 'shadow-[0_0_10px_#ef4444]');
+                    indicator.classList.add('bg-green-500', 'shadow-[0_0_10px_#22c55e]');
+
+                    logToTerminal(`Sync: Discord API (${onlineNow} online) | MongoDB Bridge (${stats.totalHumans} total)`);
+
+                    // --- RENDERIZAR AVATARES ---
+                    if (discordData.members) {
+                        const container = document.getElementById('user-avatars');
+                        if (container) {
+                            container.innerHTML = '';
+
+                            // Filtrar y Renderizar
+                            discordData.members
+                                .filter(m => m.avatar_url && !cachedBots.some(b => m.username.toLowerCase().includes(b.toLowerCase())))
+                                .sort(() => Math.random() - 0.5)
+                                .slice(0, 6)
+                                .forEach((member, i) => {
+                                    const img = document.createElement('img');
+                                    Object.assign(img, {
+                                        src: member.avatar_url,
+                                        alt: member.username,
+                                        className: "w-14 h-14 rounded-full border-4 border-[#010204] hover:-translate-y-3 transition-all duration-500 cursor-pointer shadow-2xl relative"
+                                    });
+                                    img.style.zIndex = 10 - i;
+
+                                    const label = document.getElementById('cursor-label');
+                                    img.onmouseenter = () => { label.innerText = member.username; label.style.opacity = '1'; };
+                                    img.onmouseleave = () => { label.style.opacity = '0'; };
+
+                                    container.appendChild(img);
+                                });
+                        }
+                    }
+
+                    // Actualizar contador secundario también
+                    const totalSecondary = document.getElementById('total-members-secondary');
+                    if (totalSecondary) {
+                        totalSecondary.innerText = stats.totalHumans || 0;
+                    }
+                }
+
+            } catch (err) {
+                console.error("Error en sincronización:", err);
+                logToTerminal("ERROR: Verifique Widget de Discord o el servidor local.");
+
+                // Manejo de error visual
+                const statusElem = document.getElementById('db-status');
+                statusElem.innerText = "Offline";
+                statusElem.classList.remove('text-green-500');
+                statusElem.classList.add('text-red-500');
+
+                // Indicador Visual Nav (Punto Rojo)
+                const indicator = document.getElementById('status-indicator');
+                indicator.classList.remove('bg-green-500', 'shadow-[0_0_10px_#22c55e]');
+                indicator.classList.add('bg-red-500', 'shadow-[0_0_10px_#ef4444]');
+            }
+        }
+
+        function logToTerminal(msg) {
+            const t = document.getElementById('terminal');
+            if (t) {
+                t.innerHTML += `<p><span class="text-cyan-500">[${new Date().toLocaleTimeString()}]</span> ${msg}</p>`;
+                t.scrollTop = t.scrollHeight;
+            }
+        }
+
+        // --- MANEJO DE CURSOR (ESTÉTICA NUEVA) ---
+        const cursor = document.getElementById('custom-cursor');
+        const aura = document.getElementById('cursor-aura');
+        const label = document.getElementById('cursor-label');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            aura.style.left = e.clientX + 'px';
+            aura.style.top = e.clientY + 'px';
+            label.style.left = e.clientX + 'px';
+            label.style.top = e.clientY + 'px';
+        });
+
+        // --- LÓGICA TERMINAL MODAL ---
+        function toggleTerminal() {
+            const modal = document.getElementById('terminal-modal');
+            modal.classList.toggle('active');
+        }
+
+        // --- PARALLAX Y REVEAL ---
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+
+            // Parallax suaves
+            document.querySelectorAll('.parallax-element').forEach(el => {
+                const speed = el.getAttribute('data-parallax') || 0.1;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+
+            // Orbes Parallax (efecto más lento)
+            document.querySelectorAll('.orb').forEach((orb, i) => {
+                const speed = (i + 1) * 0.05;
+                orb.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+
+            // Reveal Sections
+            document.querySelectorAll('.section-reveal').forEach(sec => {
+                const top = sec.getBoundingClientRect().top;
+                if (top < window.innerHeight * 0.85) {
+                    sec.classList.add('visible');
+                }
+            });
+        });
+
+        // Ejecución inicial y bucle cada 2 minutos
+        connectAndFetch();
+        setInterval(connectAndFetch, 120000);
+
+        // --- PARTÍCULAS ---
+        const particleScript = document.createElement('script');
+        particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
+        particleScript.onload = () => {
+            particlesJS("particles-js", {
+                particles: {
+                    number: { value: 90 },
+                    color: { value: "#7c3aed" },
+                    opacity: {
+                        value: 0.8,
+                        random: false
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#7c3aed",
+                        opacity: 0.5,
+                        width: 1.5
+                    },
+                    move: { enable: true, speed: 2 }
+                }
+            });
+        };
+        document.body.appendChild(particleScript);
+    </script>
+</body>
+
+</html>
