@@ -15,10 +15,14 @@
             --accent: #7c3aed;
         }
 
-        *,
-        *::before,
-        *::after {
-            cursor: none !important;
+        /* Solo ocultamos el cursor si el dispositivo tiene ratón (hover) */
+        @media (hover: hover) and (pointer: fine) {
+
+            *,
+            *::before,
+            *::after {
+                cursor: none !important;
+            }
         }
 
         body {
@@ -320,6 +324,15 @@
             box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
         }
 
+        @media (max-width: 1024px) {
+
+            #custom-cursor,
+            #cursor-aura,
+            #cursor-label {
+                display: none !important;
+            }
+        }
+
         ::-webkit-scrollbar {
             width: 0;
         }
@@ -338,7 +351,7 @@
 
 
     <nav
-        class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5">
+        class="fixed w-full z-50 px-8 py-4 md:py-6 flex flex-wrap justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-4 group">
             <div class="w-12 h-12 rounded-full p-1 bg-gradient-to-tr from-violet-600 to-cyan-400">
                 <img src="https://cdn.discordapp.com/icons/1233999708578516992/a_a0877c77afbe06c5beef87f4a45fabf7.gif"
@@ -355,15 +368,24 @@
             <a href="#dimensiones" class="hover:text-white transition-all">Dimensiones</a>
         </div>
 
-        <div class="flex items-center gap-6">
+        <!-- Botón para móvil -->
+        <a href="https://disboard.org/es/server/join/1233999708578516992"
+            class="md:hidden discord-link bg-white text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
+            Entrar
+        </a>
+
+        <div class="w-full md:w-auto flex justify-center md:items-center gap-6 mt-4 md:mt-0 order-last md:order-none">
             <div
-                class="hidden md:flex items-center bg-white/5 px-4 py-2 rounded-full border border-white/10 text-[10px] font-bold tracking-widest">
-                <div id="status-indicator" class="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-[0_0_10px_#22c55e]">
+                class="flex items-center bg-white/5 px-3 py-1.5 md:py-2 md:px-4 rounded-full border border-white/10 text-[8px] md:text-[10px] font-bold tracking-widest whitespace-nowrap">
+                <div id="status-indicator"
+                    class="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full mr-2 shadow-[0_0_10px_#22c55e]">
                 </div>
-                <span id="online-counter">CONECTANDO...</span>
+                <span id="online-counter">USUARIOS ONLINE</span>
             </div>
+
+            <!-- Botón para desktop -->
             <a href="https://disboard.org/es/server/join/1233999708578516992"
-                class="discord-link bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
+                class="hidden md:block discord-link bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
                 Entrar
             </a>
         </div>
@@ -478,7 +500,7 @@
                 const onlineNow = discordData.presence_count || 0;
 
                 // Actualizar contador online en el Nav
-                document.getElementById('online-counter').innerText = `${onlineNow} PERSONAS ONLINE`;
+                document.getElementById('online-counter').innerText = `${onlineNow} USUARIOS ONLINE`;
 
                 // 2. Obtener datos de MongoDB desde nuestro puente
                 const response = await fetch(`${API_URL}/api/stats`);
