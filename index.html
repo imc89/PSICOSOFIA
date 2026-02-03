@@ -459,9 +459,7 @@
     <script>
         // --- CONFIGURACIÓN DE DESPLIEGUE ---
         // Si despliegas el backend en Render/Railway, pon aquí la URL (ej: 'https://mi-backend.onrender.com')
-        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? ''
-            : 'https://TU-BACKEND-AQUI.onrender.com';
+        const API_URL = ''; // Al estar en el mismo servicio de Render, usamos rutas relativas
 
         const SERVER_ID = "1233999708578516992";
         let cachedBots = [];
