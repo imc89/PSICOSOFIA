@@ -84,6 +84,47 @@ app.post('/api/update-stats', async (req, res) => {
     }
 });
 
+// --- RUTAS DE OPINIONES ---
+app.post('/api/psicoreviews', async (req, res) => {
+    try {
+        const { username, comment, rating } = req.body;
+        if (!username || !comment || !rating) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        const dbClient = await connectDB();
+        const db = dbClient.db("psicosofiaDB");
+        const collection = db.collection("psicoreviews");
+
+        const newReview = {
+            username,
+            comment,
+            rating: parseInt(rating),
+            date: new Date()
+        };
+
+        const result = await collection.insertOne(newReview);
+        res.status(201).json({ message: "Review saved successfully", result });
+    } catch (error) {
+        console.error("Error saving review:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+app.get('/api/psicoreviews', async (req, res) => {
+    try {
+        const dbClient = await connectDB();
+        const db = dbClient.db("psicosofiaDB");
+        const collection = db.collection("psicoreviews");
+
+        const reviews = await collection.find({}).sort({ date: -1 }).limit(10).toArray();
+        res.status(200).json(reviews);
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 // --- INICIO DEL SERVIDOR ---
 app.listen(port, async () => {
     console.log(`Server running at http://localhost:${port}`);
