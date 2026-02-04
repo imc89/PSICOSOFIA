@@ -349,6 +349,7 @@
         }
 
         .section-reveal {
+            margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(50px);
             transition: all 1s ease-out;
@@ -543,6 +544,33 @@
         ::-webkit-scrollbar {
             width: 0;
         }
+
+        /* Estilos terminal interactiva */
+        #terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            width: 100%;
+            padding-top: 10px;
+        }
+
+        #discord-widget-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #discord-widget-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
     </style>
 </head>
 
@@ -576,14 +604,12 @@
             <a href="#team" class="hover:text-white transition-all">El equipo</a>
         </div>
 
-        <!-- Botón para móvil -->
         <a href="https://disboard.org/es/server/join/1233999708578516992"
             class="md:hidden discord-link bg-white text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
             Entrar
         </a>
 
         <div class="w-full md:w-auto flex justify-center md:items-center gap-6 mt-4 md:mt-0 order-last md:order-none">
-            <!-- Botón Menú Móvil -->
             <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
                 class="flex items-center justify-center hover:bg-violet-500/20 transition-all">
                 <span></span>
@@ -599,7 +625,6 @@
                 <span id="online-counter">USUARIOS ONLINE</span>
             </div>
 
-            <!-- Botón para desktop -->
             <a href="https://disboard.org/es/server/join/1233999708578516992"
                 class="hidden md:block discord-link bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
                 Entrar
@@ -671,7 +696,6 @@
             </div>
         </div>
 
-        <!-- Detail Containers (Initially Hidden) -->
         <div id="pillar-details" class="hidden opacity-0 scale-95 transition-all duration-700">
             <div id="detail-psicologia" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
                 <button onclick="closePillar()"
@@ -732,7 +756,6 @@
         <h2 class="text-4xl font-black mb-16 text-center tracking-widest uppercase opacity-20">Danos tu Opinión</h2>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Formulario -->
             <div class="stats-glass-card p-10 rounded-[40px]">
                 <h3 class="text-2xl font-bold mb-8 font-heading text-violet-400">¿Qué opinas del server?</h3>
                 <form id="review-form" class="flex flex-col gap-6">
@@ -762,18 +785,15 @@
                 </form>
             </div>
 
-            <!-- Listado de Opiniones -->
             <div class="flex flex-col gap-6">
                 <h3 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Últimos comentarios</h3>
                 <div id="reviews-container" class="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
-                    <!-- Las opiniones se cargarán aquí -->
                     <p class="text-gray-500 text-sm italic">Cargando opiniones...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mobile Menu Drawer -->
     <div id="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
     <div id="mobile-drawer">
         <div class="flex justify-between items-center mb-12">
@@ -802,12 +822,10 @@
         </div>
     </div>
 
-    <!-- Botón Terminal -->
     <div class="terminal-btn" onclick="toggleTerminal()">
         <span>&gt;_</span>
     </div>
 
-    <!-- Modal Terminal -->
     <div id="terminal-modal"
         class="fixed inset-0 z-[2000] flex items-center justify-center p-6 bg-black/40 backdrop-blur-sm">
         <div class="liquid-glass w-full max-w-2xl rounded-[40px] p-8">
@@ -824,34 +842,47 @@
                 class="bg-black/40 rounded-3xl p-6 font-mono text-[11px] text-gray-400 h-80 overflow-y-auto border border-white/5 custom-scrollbar">
                 <p class="text-violet-400">[SISTEMA] Inicializando protocolo de enlace...</p>
             </div>
+            <div class="mt-4 flex items-center gap-2 font-mono text-xs text-violet-400">
+                <span>&gt;</span>
+                <input type="text" id="terminal-input" placeholder="Escribe un comando..." autocomplete="off">
+            </div>
         </div>
+    </div>
+
+    <div id="discord-widget-modal" class="stats-glass-card p-4 rounded-3xl">
+        <div class="flex justify-end mb-2">
+            <button onclick="toggleDiscordModal()"
+                class="text-[8px] font-bold uppercase tracking-widest text-gray-500 hover:text-white">Cerrar
+                Widget</button>
+        </div>
+        <iframe src="https://discord.com/widget?id=1233999708578516992&theme=dark" width="350" height="500"
+            allowtransparency="true" frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+            class="rounded-xl shadow-lg border-none"></iframe>
     </div>
 
     <script>
         // --- CONFIGURACIÓN DE DESPLIEGUE ---
-        // Si despliegas el backend en Render/Railway, pon aquí la URL (ej: 'https://mi-backend.onrender.com')
-        const API_URL = ''; // Al estar en el mismo servicio de Render, usamos rutas relativas
-
+        const API_URL = '';
         const SERVER_ID = "1233999708578516992";
         let cachedBots = [];
 
+        // Estado de la terminal
+        let terminalUnlocked = false;
+
         async function connectAndFetch() {
             try {
-                // Cargar listado de bots si aún no se ha hecho
                 if (cachedBots.length === 0) {
                     const botRes = await fetch('bots.json');
                     cachedBots = await botRes.json();
                 }
 
-                // 1. Obtener datos de Discord (Online Humanos) directamente desde el Widget API
                 const discordResponse = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
                 const discordData = await discordResponse.json();
                 const onlineNow = discordData.presence_count || 0;
 
-                // Actualizar contador online en el Nav
                 document.getElementById('online-counter').innerText = `${onlineNow} USUARIOS ONLINE`;
 
-                // 2. Obtener datos de MongoDB desde nuestro puente
                 const response = await fetch(`${API_URL}/api/stats`);
                 if (!response.ok) throw new Error('Error al conectar con la API');
 
@@ -862,26 +893,24 @@
                     document.getElementById('total-bots').innerText = stats.totalBots || 0;
                     document.getElementById('boost-lvl').innerText = `LVL ${stats.boostLevel || 0}`;
 
-                    // Actualización de estado visual
                     const statusElem = document.getElementById('db-status');
-                    statusElem.innerText = "Sync"; // Usamos 'Sync' por estética nueva
+                    statusElem.innerText = "Sync";
                     statusElem.classList.remove('text-red-500');
                     statusElem.classList.add('text-green-500');
 
-                    // Indicador Visual Nav (Punto Verde)
                     const indicator = document.getElementById('status-indicator');
                     indicator.classList.remove('bg-red-500', 'shadow-[0_0_10px_#ef4444]');
                     indicator.classList.add('bg-green-500', 'shadow-[0_0_10px_#22c55e]');
 
-                    logToTerminal(`Sync: Discord API (${onlineNow} online) | MongoDB Bridge (${stats.totalHumans} total)`);
+                    // Solo loguear si NO está en modo interactivo
+                    if (!terminalUnlocked) {
+                        logToTerminal(`Sync: Discord API (${onlineNow} online) | MongoDB Bridge (${stats.totalHumans} total)`);
+                    }
 
-                    // --- RENDERIZAR AVATARES ---
                     if (discordData.members) {
                         const container = document.getElementById('user-avatars');
                         if (container) {
                             container.innerHTML = '';
-
-                            // Filtrar y Renderizar
                             discordData.members
                                 .filter(m => m.avatar_url && !cachedBots.some(b => m.username.toLowerCase().includes(b.toLowerCase())))
                                 .sort(() => Math.random() - 0.5)
@@ -894,67 +923,162 @@
                                         className: "w-14 h-14 rounded-full border-4 border-[#010204] hover:-translate-y-3 transition-all duration-500 cursor-pointer shadow-2xl relative"
                                     });
                                     img.style.zIndex = 10 - i;
-
                                     const label = document.getElementById('cursor-label');
-
                                     const showMemberName = (e) => {
-                                        e.stopPropagation(); // Evitar que el click se propague al document
+                                        e.stopPropagation();
                                         label.innerText = member.username;
                                         label.style.opacity = '1';
-
                                         if (window.innerWidth <= 1024) {
                                             label.style.left = e.clientX + 'px';
                                             label.style.top = e.clientY + 'px';
                                         }
                                     };
-
                                     img.onmouseenter = (e) => { if (window.innerWidth > 1024) showMemberName(e); };
                                     img.onmouseleave = () => { if (window.innerWidth > 1024) label.style.opacity = '0'; };
                                     img.onclick = showMemberName;
-
                                     container.appendChild(img);
                                 });
                         }
-                    }
-
-
-                    // Actualizar contador secundario también
-                    const totalSecondary = document.getElementById('total-members-secondary');
-                    if (totalSecondary) {
-                        totalSecondary.innerText = stats.totalHumans || 0;
                     }
                 }
 
             } catch (err) {
                 console.error("Error en sincronización:", err);
-                logToTerminal("ERROR: Verifique Widget de Discord o el servidor local.");
-
-                // Manejo de error visual
+                if (!terminalUnlocked) logToTerminal("ERROR: Verifique conexión.");
                 const statusElem = document.getElementById('db-status');
                 statusElem.innerText = "Offline";
                 statusElem.classList.remove('text-green-500');
                 statusElem.classList.add('text-red-500');
-
-                // Indicador Visual Nav (Punto Rojo)
                 const indicator = document.getElementById('status-indicator');
                 indicator.classList.remove('bg-green-500', 'shadow-[0_0_10px_#22c55e]');
                 indicator.classList.add('bg-red-500', 'shadow-[0_0_10px_#ef4444]');
             }
         }
 
-        function logToTerminal(msg) {
+        function logToTerminal(msg, color = 'text-gray-400') {
             const t = document.getElementById('terminal');
             if (t) {
-                t.innerHTML += `<p><span class="text-cyan-500">[${new Date().toLocaleTimeString()}]</span> ${msg}</p>`;
+                const spanColor = msg.includes('ERROR') ? 'text-red-500' :
+                    msg.includes('SISTEMA') ? 'text-violet-400' : color;
+
+                t.innerHTML += `<p><span class="text-cyan-500">[${new Date().toLocaleTimeString()}]</span> <span class="${spanColor}">${msg}</span></p>`;
                 t.scrollTop = t.scrollHeight;
             }
+        }
+
+        // --- LÓGICA TERMINAL INTERACTIVA ---
+        const termInput = document.getElementById('terminal-input');
+        termInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const cmd = this.value.trim().toLowerCase();
+                this.value = '';
+                handleCommand(cmd);
+            }
+        });
+
+        function handleCommand(cmd) {
+            logToTerminal(`> ${cmd}`, 'text-white font-bold');
+
+            if (!terminalUnlocked) {
+                if (cmd === 'psicosofia') {
+                    terminalUnlocked = true;
+                    logToTerminal('MODO INTERACTIVO ACTIVADO. Escribe "help" para ver comandos.', 'text-green-400');
+                } else {
+                    logToTerminal('Acceso restringido. Introduzca comando maestro.', 'text-red-400');
+                }
+                return;
+            }
+
+            // Comandos cuando ya está desbloqueado
+            switch (cmd) {
+                case 'help':
+                    logToTerminal('COMANDOS DISPONIBLES: help, exit, discord', 'text-cyan-400');
+                    break;
+                case 'exit':
+                    terminalUnlocked = false;
+                    const term = document.getElementById('terminal');
+
+                    // 1. Setup de la estructura de reinicio
+                    term.innerHTML = `
+        <p class="text-violet-400">[SISTEMA] Reiniciando protocolos...</p>
+        <div class="mt-2 font-mono">
+            <div class="flex justify-between text-[10px] mb-1">
+                <span class="text-gray-500">STATUS: REBOOTING</span>
+                <span id="loading-pct" class="text-violet-400">0%</span>
+            </div>
+            <div class="w-full text-violet-600/50 break-all leading-[8px]" id="loading-bar"></div>
+        </div>
+    `;
+
+                    let progress = 0;
+                    const barElement = document.getElementById('loading-bar');
+                    const pctElement = document.getElementById('loading-pct');
+
+                    // Determinamos cuántos caracteres caben a lo ancho (aprox 60-80 en el modal actual)
+                    const barWidth = 65;
+
+                    const interval = setInterval(() => {
+                        progress += 5;
+
+                        if (barElement) {
+                            const filledCount = Math.floor((progress / 100) * barWidth);
+                            const emptyCount = barWidth - filledCount;
+                            // Dibujamos la barra con bloques sólidos y vacíos
+                            barElement.innerText = "█".repeat(filledCount) + "░".repeat(emptyCount);
+                        }
+
+                        if (pctElement) pctElement.innerText = `${progress}%`;
+
+                        if (progress >= 100) {
+                            clearInterval(interval);
+
+                            // 2. Limpieza total y restablecimiento del mensaje inicial
+                            term.innerHTML = '<p class="text-violet-400">[SISTEMA] Inicializando protocolo de enlace...</p>';
+
+                            // 3. Forzar el log de sincronización
+                            // Nota: connectAndFetch ya tiene la lógica de: if(!terminalUnlocked) logToTerminal(...)
+                            connectAndFetch();
+                        }
+                    }, 80); // Velocidad ajustada para que sea fluida
+                    break;
+                case 'discord':
+                    logToTerminal('Inyectando interfaz de Discord...', 'text-cyan-400');
+                    toggleDiscordModal();
+                    break;
+
+                case 'snake':
+                    logToTerminal("INICIALIZANDO PROTOCOLO 'SNAKE'...", "text-green-400");
+                    setTimeout(() => {
+                        const term = document.getElementById('terminal');
+                        term.innerHTML = '<div id="snake-container" class="relative bg-black/50 border border-white/10 rounded-xl overflow-hidden" style="width:200px; height:200px; margin: 10px auto;"></div><p class="text-center text-[10px] text-gray-500">Usa las flechas del teclado. Escribe "exit" para salir.</p>';
+                        initSnake();
+                    }, 1000);
+                    break;
+
+                case 'check_db':
+                    logToTerminal("PINGING MONGODB BRIDGE...", "text-gray-500");
+                    const startTime = Date.now();
+                    fetch(`${API_URL}/api/stats`)
+                        .then(() => {
+                            const latency = Date.now() - startTime;
+                            logToTerminal(`RESPUESTA DESDE CLUSTER: ${latency}ms`, "text-green-400");
+                            logToTerminal("ESTADO: Estable", "text-green-500");
+                        })
+                        .catch(() => logToTerminal("ERROR: Timeout en la base de datos", "text-red-500"));
+                    break;
+                default:
+                    logToTerminal(`Comando no reconocido: ${cmd}`, 'text-red-300');
+            }
+        }
+
+        function toggleDiscordModal() {
+            document.getElementById('discord-widget-modal').classList.toggle('active');
         }
 
         // --- MANEJO DE CURSOR (ESTÉTICA NUEVA) ---
         const cursor = document.getElementById('custom-cursor');
         const aura = document.getElementById('cursor-aura');
         const label = document.getElementById('cursor-label');
-
         let isOverLink = false;
         let mouseX = 0, mouseY = 0;
 
@@ -964,16 +1088,12 @@
             aura.style.top = e.clientY + 'px';
             label.style.left = e.clientX + 'px';
             label.style.top = e.clientY + 'px';
-
             mouseX = e.clientX;
             mouseY = e.clientY;
-
-            // Detección más estricta: solo si estamos encima de un elemento interactivo
             const hoverTarget = e.target.closest('a, button, .pillar-card, .discord-link, #terminal-input, .terminal-btn');
             isOverLink = !!hoverTarget;
         });
 
-        // Generar letras continuas mientras el cursor está sobre un enlace
         let letterTimer = 0;
         function continuousLetters() {
             if (isOverLink) {
@@ -986,33 +1106,23 @@
         }
         continuousLetters();
 
-        // Cerrar label al hacer click fuera (especialmente para móvil)
         document.addEventListener('mousedown', (e) => {
             if (window.innerWidth <= 1024 && !e.target.closest('#user-avatars img')) {
                 document.getElementById('cursor-label').style.opacity = '0';
             }
         });
 
-        // Explosión de símbolos al hacer click (solo en elementos interactivos)
         document.addEventListener('mousedown', (e) => {
             const isClickable = e.target.closest('a, button, .pillar-card, .discord-link, #terminal-input, .terminal-btn');
-
             if (isClickable) {
-                // DETENER spawns de hover inmediatamente
                 isOverLink = false;
-
-                // ELIMINAR letras de hover inmediatamente para que no estorben la explosión
                 document.querySelectorAll('.letter-particle').forEach(p => p.remove());
-
-                // 1. Destello central (flash)
                 const flash = document.createElement('div');
                 flash.className = 'click-flash';
                 flash.style.left = e.clientX + 'px';
                 flash.style.top = e.clientY + 'px';
                 document.body.appendChild(flash);
                 setTimeout(() => flash.remove(), 400);
-
-                // 2. Onda expansiva (ring)
                 const ring = document.createElement('div');
                 ring.className = 'click-ring';
                 ring.style.left = e.clientX + 'px';
@@ -1022,37 +1132,29 @@
             }
         });
 
-        const characters = "ΣΨΩΔΦΞΠΓΛΘϘϞϟϠϢϣϤϥϦϧϨϩϪϫϬϭϮϯ"; // Solo símbolos místicos/psi
-
+        const characters = "ΣΨΩΔΦΞΠΓΛΘϘϞϟϠϢϣϤϥϦϧϨϩϪϫϬϭϮϯ";
         function createLetter(x, y, isExplosion) {
             const span = document.createElement('span');
             span.className = 'letter-particle';
             span.innerText = characters[Math.floor(Math.random() * characters.length)];
-
             const colors = ['#fff', '#a78bfa', '#00d4ff', '#7c3aed'];
             const color = colors[Math.floor(Math.random() * colors.length)];
-
-            // Offset inicial mayor para que no salgan apelmazadas
             const offsetX = (Math.random() - 0.5) * 60;
             const offsetY = (Math.random() - 0.5) * 60;
-
             let targetX, targetY, duration, size;
-
             if (isExplosion) {
                 const angle = Math.random() * Math.PI * 2;
-                const dist = Math.random() * 700 + 500; // Radio de dispersión masivo (500px a 1200px)
+                const dist = Math.random() * 700 + 500;
                 targetX = Math.cos(angle) * dist;
                 targetY = Math.sin(angle) * dist;
-                duration = Math.random() * 1.0 + 1.0; // Más tiempo para la travesía
+                duration = Math.random() * 1.0 + 1.0;
                 size = Math.random() * 8 + 8;
             } else {
-                // Efecto de ascensión alrededor del cursor
-                targetX = (Math.random() - 0.5) * 100; // Flotación lateral
-                targetY = -(Math.random() * 100 + 50); // Ascender hacia arriba (negativo es arriba)
+                targetX = (Math.random() - 0.5) * 100;
+                targetY = -(Math.random() * 100 + 50);
                 duration = Math.random() * 0.8 + 0.5;
                 size = Math.random() * 5 + 8;
             }
-
             span.style.left = (x + offsetX) + 'px';
             span.style.top = (y + offsetY) + 'px';
             span.style.setProperty('--color', color);
@@ -1061,31 +1163,21 @@
             span.style.setProperty('--x', targetX + 'px');
             span.style.setProperty('--y', targetY + 'px');
             span.style.setProperty('--rotate', (Math.random() * 360 - 180) + 'deg');
-
             document.body.appendChild(span);
             setTimeout(() => span.remove(), duration * 1000);
         }
 
-        // --- LÓGICA DE EXPANSIÓN DE PILARES ---
+        // --- EXPANSIÓN PILARES ---
         function expandPillar(id) {
             const grid = document.getElementById('pillars-grid');
             const detailsWrapper = document.getElementById('pillar-details');
-
-            // Ocultar grid con animación
             grid.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
-
             setTimeout(() => {
                 grid.classList.add('hidden');
-
-                // Mostrar contenedor de detalles
                 detailsWrapper.classList.remove('hidden');
-
-                // Mostrar el detalle específico
                 document.querySelectorAll('.detail-view').forEach(view => view.classList.add('hidden'));
                 const specificDetail = document.getElementById(`detail-${id}`);
                 specificDetail.classList.remove('hidden');
-
-                // Activar animación de entrada
                 setTimeout(() => {
                     detailsWrapper.classList.remove('opacity-0', 'scale-95');
                     detailsWrapper.classList.add('opacity-100', 'scale-100');
@@ -1096,39 +1188,28 @@
         function closePillar() {
             const grid = document.getElementById('pillars-grid');
             const detailsWrapper = document.getElementById('pillar-details');
-
-            // Animación de salida de detalles
             detailsWrapper.classList.remove('opacity-100', 'scale-100');
             detailsWrapper.classList.add('opacity-0', 'scale-95');
-
             setTimeout(() => {
                 detailsWrapper.classList.add('hidden');
                 grid.classList.remove('hidden');
-
-                // Animación de entrada de grid
                 setTimeout(() => {
                     grid.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
                 }, 50);
             }, 600);
         }
 
-        // --- PARALLAX Y REVEAL ---
+        // --- SCROLL EFFECTS ---
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
-
-            // Parallax suaves
             document.querySelectorAll('.parallax-element').forEach(el => {
                 const speed = el.getAttribute('data-parallax') || 0.1;
                 el.style.transform = `translateY(${scrolled * speed}px)`;
             });
-
-            // Orbes Parallax (efecto más lento)
             document.querySelectorAll('.orb').forEach((orb, i) => {
                 const speed = (i + 1) * 0.05;
                 orb.style.transform = `translateY(${scrolled * speed}px)`;
             });
-
-            // Reveal Sections
             document.querySelectorAll('.section-reveal').forEach(sec => {
                 const top = sec.getBoundingClientRect().top;
                 if (top < window.innerHeight * 0.85) {
@@ -1137,35 +1218,29 @@
             });
         });
 
-        // --- LÓGICA TERMINAL MODAL ---
         function toggleTerminal() {
             const modal = document.getElementById('terminal-modal');
             modal.classList.toggle('active');
+            if (modal.classList.contains('active')) termInput.focus();
         }
 
-        // --- LÓGICA MENÚ MÓVIL ---
         function toggleMobileMenu() {
             const drawer = document.getElementById('mobile-drawer');
             const overlay = document.getElementById('mobile-drawer-overlay');
             drawer.classList.toggle('active');
             overlay.classList.toggle('active');
-
-            // Prevenir scroll cuando el menú está abierto
             document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
         }
 
-        // --- LÓGICA DE OPINIONES ---
         async function fetchReviews() {
             try {
                 const res = await fetch(`${API_URL}/api/psicoreviews`);
                 const reviews = await res.json();
                 const container = document.getElementById('reviews-container');
-
                 if (reviews.length === 0) {
-                    container.innerHTML = '<p class="text-gray-500 text-sm italic">Aún no hay opiniones. ¡Sé el primero!</p>';
+                    container.innerHTML = '<p class="text-gray-500 text-sm italic">Aún no hay opiniones.</p>';
                     return;
                 }
-
                 container.innerHTML = reviews.map(rev => `
                     <div class="review-card">
                         <div class="flex justify-between items-start mb-2">
@@ -1173,57 +1248,41 @@
                             <span class="text-[#fbbf24] text-xs">${'★'.repeat(rev.rating)}</span>
                         </div>
                         <p class="text-gray-300 text-sm leading-relaxed">${rev.comment}</p>
-                        <div class="mt-2 text-[9px] text-white-500 uppercase tracking-widest font-bold">
-                            ${new Date(rev.date).toLocaleDateString()}
-                        </div>
                     </div>
                 `).join('');
-            } catch (err) {
-                console.error("Error fetching reviews:", err);
-            }
+            } catch (err) { console.error(err); }
         }
 
         document.getElementById('review-form').onsubmit = async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button');
             const originalText = btn.innerText;
-
             const formData = {
                 username: document.getElementById('rev-username').value,
                 comment: document.getElementById('rev-comment').value,
                 rating: document.querySelector('input[name="rating"]:checked')?.value || 5
             };
-
             try {
                 btn.innerText = 'ENVIANDO...';
                 btn.disabled = true;
-
                 const res = await fetch(`${API_URL}/api/psicoreviews`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-
                 if (res.ok) {
                     e.target.reset();
                     fetchReviews();
                     logToTerminal(`SISTEMA: Opinión recibida de ${formData.username}`);
                 }
-            } catch (err) {
-                logToTerminal(`ERROR: No se pudo enviar la opinión`);
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+            } catch (err) { logToTerminal(`ERROR: No se pudo enviar`); }
+            finally { btn.innerText = originalText; btn.disabled = false; }
         };
 
-        // Ejecución inicial y bucle cada 5 minutos
         connectAndFetch();
-        fetchReviews(); // Cargar opiniones iniciales
+        fetchReviews();
         setInterval(connectAndFetch, 300000);
-        setInterval(fetchReviews, 300000); // Recargar opiniones periódicamente
 
-        // --- PARTÍCULAS ---
         const particleScript = document.createElement('script');
         particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
         particleScript.onload = () => {
@@ -1231,26 +1290,55 @@
                 particles: {
                     number: { value: 90 },
                     color: { value: "#7c3aed" },
-                    opacity: {
-                        value: 0.8,
-                        random: false
-                    },
-                    size: {
-                        value: 3,
-                        random: true
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#7c3aed",
-                        opacity: 0.5,
-                        width: 1.5
-                    },
+                    opacity: { value: 0.8 },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#7c3aed", opacity: 0.5, width: 1.5 },
                     move: { enable: true, speed: 2 }
                 }
             });
         };
         document.body.appendChild(particleScript);
+
+        //  INICIO LOGICA DE JUEGO
+        function initSnake() {
+            const container = document.getElementById('snake-container');
+            const size = 200, grid = 10;
+            let snake = [{ x: 50, y: 50 }], food = { x: 100, y: 100 }, dx = grid, dy = 0;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = size; canvas.height = size;
+            container.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+
+            function draw() {
+                if (!document.getElementById('snake-container')) return; // Frenar si el usuario sale
+                ctx.fillStyle = "black"; ctx.fillRect(0, 0, size, size);
+                ctx.fillStyle = "#7c3aed";
+                snake.forEach(p => ctx.fillRect(p.x, p.y, grid - 1, grid - 1));
+                ctx.fillStyle = "#00d4ff"; ctx.fillRect(food.x, food.y, grid - 1, grid - 1);
+
+                let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+                if (head.x < 0 || head.x >= size || head.y < 0 || head.y >= size || snake.some(p => p.x === head.x && p.y === head.y)) {
+                    logToTerminal("GAME OVER: Protocolo Snake fallido.", "text-red-500");
+                    return;
+                }
+                snake.unshift(head);
+                if (head.x === food.x && head.y === food.y) {
+                    food = { x: Math.floor(Math.random() * size / grid) * grid, y: Math.floor(Math.random() * size / grid) * grid };
+                } else { snake.pop(); }
+                setTimeout(draw, 100);
+            }
+
+            document.onkeydown = (e) => {
+                if (e.key === "ArrowUp" && dy === 0) { dx = 0; dy = -grid; }
+                else if (e.key === "ArrowDown" && dy === 0) { dx = 0; dy = grid; }
+                else if (e.key === "ArrowLeft" && dx === 0) { dx = -grid; dy = 0; }
+                else if (e.key === "ArrowRight" && dx === 0) { dx = grid; dy = 0; }
+            };
+            draw();
+        }
+        //  FIN LOGICA DE JUEGO
+
     </script>
 </body>
 
