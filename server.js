@@ -54,6 +54,19 @@ app.get('/api/stats', async (req, res) => {
     }
 });
 
+app.get('/api/psicofilms', async (req, res) => {
+    try {
+        const dbClient = await connectDB();
+        const db = dbClient.db("psicosofiaDB");
+        const collection = db.collection("psicofilms");
+        const films = await collection.find({}).toArray();
+        res.status(200).json(films);
+    } catch (error) {
+        console.error("Error fetching films:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 app.post('/api/update-stats', async (req, res) => {
     try {
         const { guildName, totalMembers, humanCount, botCount, onlineHumans, boostLevel, boostCount } = req.body;
@@ -124,6 +137,8 @@ app.get('/api/psicoreviews', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+// --- RUTA DE PELÍCULAS (OCIO) ELIMINADA DE AQUÍ (MOVIDA ARRIBA) ---
 
 // --- INICIO DEL SERVIDOR ---
 app.listen(port, async () => {
