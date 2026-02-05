@@ -701,6 +701,37 @@
         </div>
     </nav>
 
+
+
+    <div id="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-drawer">
+        <div class="flex justify-between items-center mb-12">
+            <span
+                class="text-xl font-black font-heading tracking-tighter uppercase italic text-violet-400">Psicosofia</span>
+            <button onclick="toggleMobileMenu()"
+                class="text-gray-500 hover:text-white text-[10px] uppercase font-bold tracking-widest border border-white/10 px-4 py-2 rounded-full">Cerrar</button>
+        </div>
+        <div class="flex flex-col gap-8 text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">
+            <a href="#pilares" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">01. Los
+                Pilares</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">02. El Server
+                y su Equipo</a>
+            <a href="#ocio" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">03. Momentos
+                de Ocio</a>
+            <a href="#opinion" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">04.
+                Opiniones</a>
+        </div>
+
+        <div class="mt-auto pt-10 border-t border-white/5">
+            <p class="text-[9px] text-gray-500 mb-6 tracking-widest leading-loose">UN ESPACIO PARA LA PSIQUE Y LA
+                EVOLUCIÓN DIGITAL.</p>
+            <a href="https://disboard.org/es/server/join/1233999708578516992"
+                class="discord-link bg-violet-600 text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest text-center block shadow-[0_10px_30px_rgba(124,58,237,0.3)]">
+                Entrar ahora
+            </a>
+        </div>
+    </div>
+
     <!-- 
        SECCIÓN HERO
        Puerta de entrada con logo animado y estadísticas principales.
@@ -1257,35 +1288,6 @@
                 </div>
             </div>
         </section>
-
-        <div id="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
-        <div id="mobile-drawer">
-            <div class="flex justify-between items-center mb-12">
-                <span
-                    class="text-xl font-black font-heading tracking-tighter uppercase italic text-violet-400">Psicosofia</span>
-                <button onclick="toggleMobileMenu()"
-                    class="text-gray-500 hover:text-white text-[10px] uppercase font-bold tracking-widest border border-white/10 px-4 py-2 rounded-full">Cerrar</button>
-            </div>
-            <div class="flex flex-col gap-8 text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">
-                <a href="#pilares" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">01. Los
-                    Pilares</a>
-                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">02. El Server
-                    y su Equipo</a>
-                <a href="#ocio" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">03. Momentos
-                    de Ocio</a>
-                <a href="#opinion" onclick="toggleMobileMenu()" class="hover:text-violet-400 transition-all">04.
-                    Opiniones</a>
-            </div>
-
-            <div class="mt-auto pt-10 border-t border-white/5">
-                <p class="text-[9px] text-gray-500 mb-6 tracking-widest leading-loose">UN ESPACIO PARA LA PSIQUE Y LA
-                    EVOLUCIÓN DIGITAL.</p>
-                <a href="https://disboard.org/es/server/join/1233999708578516992"
-                    class="discord-link bg-violet-600 text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest text-center block shadow-[0_10px_30px_rgba(124,58,237,0.3)]">
-                    Entrar ahora
-                </a>
-            </div>
-        </div>
 
         <div class="terminal-btn" onclick="toggleTerminal()">
             <span>&gt;_</span>
