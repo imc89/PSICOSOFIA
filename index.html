@@ -731,8 +731,12 @@
                     <span id="total-humans" class="text-6xl font-black tracking-tighter text-white">0</span>
                     <span class="text-violet-400 font-bold text-sm uppercase tracking-[0.2em]">miembros</span>
                 </div>
-                <div class="flex gap-6 mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                <div class="flex flex-wrap gap-4 mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                     <span>Bots: <b id="total-bots" class="text-white">...</b></span>
+                    <span class="opacity-20">|</span>
+                    <span>Boost: <b id="boost-lvl" class="text-white">...</b></span>
+                    <span class="opacity-20">|</span>
+                    <span>Status: <b id="db-status" class="text-red-500">Wait</b></span>
                 </div>
     </section>
 
@@ -1357,18 +1361,33 @@
 
             async function connectAndFetch() {
                 try {
+                    // Cargar bots (archivo local, debería ser rápido)
                     if (cachedBots.length === 0) {
-                        const botRes = await fetch('bots.json');
-                        cachedBots = await botRes.json();
+                        try {
+                            const botRes = await fetch('bots.json');
+                            cachedBots = await botRes.json();
+                        } catch (e) {
+                            console.warn("No se pudo cargar bots.json, continuando sin filtros...");
+                        }
                     }
 
-                    const discordResponse = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-                    const discordData = await discordResponse.json();
-                    const onlineNow = discordData.presence_count || 0;
+                    // --- DISCORD FETCH (OPCIONAL/EXTERNO) ---
+                    // Lo envolvemos en su propio try/catch para que no bloquee a la DB
+                    let onlineNow = 0;
+                    let discordData = null;
+                    try {
+                        const discordResponse = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
+                        if (discordResponse.ok) {
+                            discordData = await discordResponse.json();
+                            onlineNow = discordData.presence_count || 0;
+                            const onlineCounter = domCache.onlineCounter;
+                            if (onlineCounter) onlineCounter.innerText = `${onlineNow} USUARIOS ONLINE`;
+                        }
+                    } catch (discordErr) {
+                        console.warn("Fallo al conectar con Discord API (Widget):", discordErr);
+                    }
 
-                    const onlineCounter = domCache.onlineCounter;
-                    if (onlineCounter) onlineCounter.innerText = `${onlineNow} USUARIOS ONLINE`;
-
+                    // --- MONGODB BRIDGE FETCH (CRÍTICO/INTERNO) ---
                     const response = await fetch(`${API_URL}/api/stats`);
                     if (!response.ok) throw new Error('Error al conectar con la API');
 
@@ -1398,10 +1417,11 @@
 
                         // Solo loguear si NO está en modo interactivo
                         if (!terminalUnlocked) {
-                            logToTerminal(`Sync: Discord API (${onlineNow} online) | MongoDB Bridge (${stats.totalHumans} total)`);
+                            const discordStatus = discordData ? `Discord (${onlineNow} online)` : "Discord Off";
+                            logToTerminal(`Sync: ${discordStatus} | MongoDB Bridge (${stats.totalHumans} total)`);
                         }
 
-                        if (discordData.members) {
+                        if (discordData && discordData.members) {
                             const container = domCache.userAvatars;
                             if (container) {
                                 const fragment = document.createDocumentFragment();
