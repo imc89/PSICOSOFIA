@@ -998,48 +998,42 @@
                     terminalUnlocked = false;
                     const term = document.getElementById('terminal');
 
-                    // 1. Setup de la estructura de reinicio
+                    // 1. Estructura con barra de progreso CSS real
                     term.innerHTML = `
-        <p class="text-violet-400">[SISTEMA] Reiniciando protocolos...</p>
-        <div class="mt-2 font-mono">
+        <div class="w-full font-mono">
+            <p class="text-violet-400 mb-2">[SISTEMA] Reiniciando protocolos...</p>
             <div class="flex justify-between text-[10px] mb-1">
-                <span class="text-gray-500">STATUS: REBOOTING</span>
-                <span id="loading-pct" class="text-violet-400">0%</span>
+                <span class="text-gray-500 uppercase tracking-widest">Rebooting_System</span>
+                <span id="loading-pct" class="text-violet-400 font-bold">0%</span>
             </div>
-            <div class="w-full text-violet-600/50 break-all leading-[8px]" id="loading-bar"></div>
+            <div class="w-full h-4 bg-violet-900/20 border border-violet-500/30 rounded-sm overflow-hidden p-[2px]">
+                <div id="loading-bar-inner" class="h-full bg-violet-500 shadow-[0_0_10px_#7c3aed]" style="width: 0%"></div>
+            </div>
         </div>
     `;
 
                     let progress = 0;
-                    const barElement = document.getElementById('loading-bar');
+                    const barInner = document.getElementById('loading-bar-inner');
                     const pctElement = document.getElementById('loading-pct');
 
-                    // Determinamos cuántos caracteres caben a lo ancho (aprox 60-80 en el modal actual)
-                    const barWidth = 65;
-
                     const interval = setInterval(() => {
-                        progress += 5;
+                        progress += 2; // Incremento más pequeño para suavidad
 
-                        if (barElement) {
-                            const filledCount = Math.floor((progress / 100) * barWidth);
-                            const emptyCount = barWidth - filledCount;
-                            // Dibujamos la barra con bloques sólidos y vacíos
-                            barElement.innerText = "█".repeat(filledCount) + "░".repeat(emptyCount);
-                        }
-
+                        if (barInner) barInner.style.width = `${progress}%`;
                         if (pctElement) pctElement.innerText = `${progress}%`;
 
                         if (progress >= 100) {
                             clearInterval(interval);
 
-                            // 2. Limpieza total y restablecimiento del mensaje inicial
-                            term.innerHTML = '<p class="text-violet-400">[SISTEMA] Inicializando protocolo de enlace...</p>';
+                            // 2. Limpieza y mensaje final con estilo de consola
+                            term.innerHTML = `
+                <p class="text-violet-400">[SISTEMA] Inicializando protocolo de enlace...</p>
+            `;
 
-                            // 3. Forzar el log de sincronización
-                            // Nota: connectAndFetch ya tiene la lógica de: if(!terminalUnlocked) logToTerminal(...)
+                            // 3. Volver a activar los logs automáticos
                             connectAndFetch();
                         }
-                    }, 80); // Velocidad ajustada para que sea fluida
+                    }, 30); // 30ms * 50 pasos = 1.5 segundos aprox.
                     break;
                 case 'discord':
                     logToTerminal('Inyectando interfaz de Discord...', 'text-cyan-400');
