@@ -537,7 +537,7 @@
             list.forEach(item => {
                 const card = document.createElement('div');
                 // Rediseño: Vertical, compacto, máximo aprovechamiento de carátula
-                card.className = "flex flex-col items-center gap-2 p-2 bg-white/5 border border-white/10 rounded-2xl transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-4 hover:shadow-[0_45px_100px_-20px_rgba(124,58,237,0.7),0_0_30px_0_rgba(139,92,246,0.3)] hover:bg-white/15 cursor-pointer group h-full w-full max-w-[190px] mx-auto transform-gpu";
+                card.className = "flex flex-col items-center gap-2 p-2 bg-white/5 border border-white/10 rounded-2xl transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-4 hover:shadow-[0_45px_100px_-20px_rgba(124,58,237,0.7),0_0_30px_0_rgba(139,92,246,0.3)] hover:bg-white/15 group h-full w-full max-w-[190px] mx-auto transform-gpu";
 
                 const imgSrc = item.poster ? (item.poster.startsWith('http') ? item.poster : (item.poster.startsWith('data:') ? item.poster : `data:image/jpeg;base64,${item.poster}`)) : 'https://via.placeholder.com/300x450/000000/ffffff?text=No+Cover';
                 const date = item.date || "05-02-2025";

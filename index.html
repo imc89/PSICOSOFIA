@@ -468,7 +468,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             z-index: 1000;
             transition: 0.3s;
             color: #7c3aed;
@@ -506,7 +505,6 @@
             display: none;
             flex-direction: column;
             gap: 4px;
-            cursor: pointer;
             z-index: 100;
             padding: 10px;
             background: rgba(124, 58, 237, 0.1);
@@ -580,7 +578,6 @@
         .star-rating label {
             font-size: 30px;
             color: rgba(255, 255, 255, 0.1);
-            cursor: pointer;
             transition: color 0.3s ease;
         }
 
@@ -882,7 +879,7 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 pb-4 px-2">
                                     <!-- Staff Card 1: Fundador -->
                                     <div onclick="expandStaff('owner')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-violet-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-violet-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -916,7 +913,7 @@
 
                                     <!-- Staff Card 2: Admin -->
                                     <div onclick="expandStaff('admin')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-cyan-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-cyan-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -945,7 +942,7 @@
 
                                     <!-- Staff Card 3: Moderador -->
                                     <div onclick="expandStaff('mod')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-green-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-green-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -974,7 +971,7 @@
 
                                     <!-- Staff Card 4: Helper -->
                                     <div onclick="expandStaff('apoyo')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-amber-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-amber-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -1002,7 +999,7 @@
 
                                     <!-- Staff Card 5: Creativo -->
                                     <div onclick="expandStaff('diseno')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-pink-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-pink-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -1031,7 +1028,7 @@
 
                                     <!-- Staff Card 6: Eventos -->
                                     <div onclick="expandStaff('eventos')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-blue-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
+                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-blue-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
@@ -1151,7 +1148,7 @@
                 </h2>
                 <div id="pillars-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 transition-all duration-700">
                     <div onclick="expandPillar('psicologia')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center cursor-pointer">
+                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-violet-500 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             01</div>
@@ -1159,7 +1156,7 @@
                         <p class="text-gray-400 text-sm leading-relaxed">Psicología, apoyo y equilibrio mental.</p>
                     </div>
                     <div onclick="expandPillar('filosofia')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center cursor-pointer">
+                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-cyan-400 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             02</div>
@@ -1167,7 +1164,7 @@
                         <p class="text-gray-400 text-sm leading-relaxed">Filosofía, reflexión y debate ético.</p>
                     </div>
                     <div onclick="expandPillar('letras')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center cursor-pointer">
+                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-white text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             03</div>
