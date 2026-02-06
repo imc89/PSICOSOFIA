@@ -36,12 +36,7 @@
            Se oculta el cursor nativo solo en dispositivos con ratón para habilitar el cursor personalizado.
         */
         @media (hover: hover) and (pointer: fine) {
-
-            *,
-            *::before,
-            *::after {
-                cursor: none !important;
-            }
+            /* Custom cursor logic moved to JS/Effects only */
         }
 
         body {
@@ -149,17 +144,7 @@
             margin-top: 145px;
         }
 
-        #custom-cursor {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out;
-        }
+        /* #custom-cursor removed */
 
         #cursor-aura {
             position: fixed;
@@ -647,7 +632,8 @@
     <!-- ==========================================
        ELEMENTOS DE INTERFAZ GLOBAL
        ========================================== -->
-    <div id="custom-cursor"></div>
+    <!-- CURSOR PERSONALIZADO (Effects only) -->
+    <!-- <div id="custom-cursor"></div> REMOVED -->
     <div id="cursor-aura"></div>
     <div id="cursor-label"></div>
 
@@ -881,12 +867,12 @@
                             <div class="max-h-[480px] overflow-y-auto pr-2 custom-scrollbar">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 pb-4 px-2">
                                     <!-- Staff Card 1: Fundador -->
-                                    <div onclick="expandStaff('mero')"
+                                    <div onclick="expandStaff('owner')"
                                         class="staff-clickable stats-glass-card p-5 rounded-2xl cursor-pointer group hover:border-violet-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="public/img/staff/mero.png" alt="Staff 1"
+                                                <img src="public/img/staff/caus.png" alt="Staff 1"
                                                     class="w-full h-full rounded-full object-cover bg-black">
                                             </div>
                                             <div>
@@ -901,12 +887,16 @@
                                             <span>Desde Abril 2024</span>
                                         </div>
                                         <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Creador y visionario principal de Psicosofia. Experto en dinámicas de grupo
-                                            y
-                                            apasionado por la intersección entre la tecnología y la salud mental. Se
-                                            encarga
-                                            de
-                                            la dirección estratégica del servidor.
+                                            Cada día, poder ver crecer esta hermosa comunidad psicosofista a
+                                            psicosofista hace que me sienta realizado, por poder hacer converger a
+                                            personas con las mismas pasiones, metas y hambre por aprender y compartir
+                                            conocimiento y argumentos. Con un ambiente respetuoso, académico y adulto
+                                            procuramos que nuestros miembros se encuentren lo más cómodos, integrados y
+                                            escuchados posible, velando siempre por la libertad de cada uno sin afectar
+                                            a la del otro. Uno de mis grandes gustos del día es poder entrar al servidor
+                                            y ver canales como el general, música, poesía, ajedrez, debates y psicología
+                                            activos y llenos de vida, vida que cada uno da y recibe de este maravilloso
+                                            espacio, PsicoSofía.
                                         </p>
                                     </div>
 
@@ -916,7 +906,7 @@
                                         <div class="flex items-center gap-3 mb-3">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Staff 2"
+                                                <img src="public/img/staff/aspini.png" alt="Staff 2"
                                                     class="w-full h-full rounded-full object-cover bg-black">
                                             </div>
                                             <div>
@@ -931,12 +921,11 @@
                                             <span>Desde Mayo 2024</span>
                                         </div>
                                         <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Encargado de la gestión técnica y operativa diaria. Supervisa el
-                                            funcionamiento
-                                            de
-                                            los bots, la organización de canales y la implementación de nuevas
-                                            funcionalidades
-                                            para mejorar la experiencia.
+                                            Soy Iñigo, Administrador y creador del bot Lawliet y de esta web. Mi labor
+                                            es
+                                            más discreta y suelo estar más inactivo observando desde las sombras, pero
+                                            sigo en disposición de ayudar para que este espacio crezca y sea seguro para
+                                            todos. Recordad: aunque no me veáis, vigilamos y estamos siempre presentes.
                                         </p>
                                     </div>
 
@@ -1647,7 +1636,6 @@
         }
 
         // --- MANEJO DE CURSOR (ZERO DELAY) ---
-        const cursor = document.getElementById('custom-cursor');
         const aura = document.getElementById('cursor-aura');
         const label = document.getElementById('cursor-label');
 
@@ -1675,11 +1663,7 @@
             mouseX = e.clientX;
             mouseY = e.clientY;
 
-            // Cursor sin delay - directo
-            if (cursor) {
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-            }
+            // Cursor logic removed
 
             const hoverTarget = e.target.closest('a, button, .pillar-card, .discord-link, #terminal-input, .terminal-btn, .staff-clickable');
             isOverLink = !!hoverTarget;
@@ -1812,22 +1796,22 @@
 
         // --- EXPANSIÓN STAFF ---
         const staffData = {
-            'mero': {
-                name: 'Nombre Fundador',
+            'owner': {
+                name: 'Caus',
                 role: '👑 Owner',
-                date: 'Abril 2024',
-                img: 'public/img/staff/mero.png',
-                desc: 'Creador y visionario principal de Psicosofia. Experto en dinámicas de grupo y apasionado por la intersección entre la tecnología y la salud mental. Se encarga de la dirección estratégica del servidor, fomentando un espacio seguro y de crecimiento para todos los miembros. Su visión es hacer de este servidor la comunidad de referencia para el bienestar mental y la filosofía.',
+                date: '26/12/2022',
+                img: 'public/img/staff/caus.png',
+                desc: 'Cada día, poder ver crecer esta hermosa comunidad psicosofista a psicosofista hace que me sienta realizado, por poder hacer converger a personas con las mismas pasiones, metas y hambre por aprender y compartir conocimiento y argumentos. Con un ambiente respetuoso, académico y adulto procuramos que nuestros miembros se encuentren lo más cómodos, integrados y escuchados posible, velando siempre por la libertad de cada uno sin afectar a la del otro. Uno de mis grandes gustos del día es poder entrar al servidor y ver canales como el general, música, poesía, ajedrez, debates y psicología activos y llenos de vida, vida que cada uno da y recibe de este maravilloso espacio, PsicoSofía.',
                 specialty: 'Dirección',
                 level: 'Fundador',
                 color: 'from-violet-500 to-cyan-500'
             },
             'admin': {
-                name: 'Nombre Admin',
+                name: 'Aspiñi',
                 role: '⚡ Administrador',
-                date: 'Mayo 2024',
-                img: 'https://cdn.discordapp.com/embed/avatars/1.png',
-                desc: 'Encargado de la gestión técnica y operativa diaria. Supervisa el funcionamiento de los bots, la organización de canales y la implementación de nuevas funcionalidades para mejorar la experiencia. Su enfoque es la eficiencia y la automatización para que la comunidad fluya sin problemas técnicos.',
+                date: '13/01/2025',
+                img: 'public/img/staff/aspini.png',
+                desc: 'Soy Iñigo, Administrador y creador del bot Lawliet y de esta web. Mi labor es más discreta y suelo estar más inactivo observando desde las sombras, pero sigo en disposición de ayudar para que este espacio crezca ysea seguro para todos. Recordad: aunque no me veáis, vigilamos y estamos siempre presentes.',
                 specialty: 'Sistemas',
                 level: 'Admin',
                 color: 'from-cyan-500 to-blue-500'
