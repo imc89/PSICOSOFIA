@@ -494,7 +494,25 @@
 
         body {
             -webkit-tap-highlight-color: rgba(124, 58, 237, 0.1);
-            touch-action: pan-y;
+            touch-action: manipulation;
+            /* Permite scroll libre y previene double-tap-zoom */
+        }
+
+        /* Permitir scroll libre en contenedores principales */
+        section,
+        main,
+        .stats-glass-card {
+            touch-action: pan-y pan-x;
+        }
+
+        /* Elementos clickeables - permitir scroll mientras se mantiene click */
+        .staff-clickable,
+        .pillar-card,
+        button,
+        a,
+        .terminal-btn {
+            touch-action: manipulation;
+            cursor: pointer;
         }
 
         /* Reducir animaciones en dispositivos que lo prefieran */
