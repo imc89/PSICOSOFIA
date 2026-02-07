@@ -482,6 +482,178 @@
             box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
         }
 
+        /* ==========================================
+           OPTIMIZACIONES PARA MÓVIL Y TOUCH
+           ========================================== */
+
+        /* Smooth scrolling optimizado para touch devices */
+        html {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            -webkit-tap-highlight-color: rgba(124, 58, 237, 0.1);
+            touch-action: pan-y;
+        }
+
+        /* Reducir animaciones en dispositivos que lo prefieran */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ==========================================
+           MOBILE SMALL (320px - 480px)
+           ========================================== */
+        @media (max-width: 480px) {
+
+            /* Hero section */
+            .image-logo {
+                width: 100px !important;
+                height: 100px !important;
+                margin-bottom: 20px !important;
+            }
+
+            /* Typography - Reducir tamaños dramáticamente */
+            h1 {
+                font-size: 2.5rem !important;
+                /* ~40px en lugar de 7xl */
+                line-height: 1.1 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            h2 {
+                font-size: 1.75rem !important;
+                /* ~28px */
+                margin-bottom: 1.5rem !important;
+            }
+
+            h3 {
+                font-size: 1.25rem !important;
+                /* ~20px */
+            }
+
+            /* Stats card - Layout vertical compacto */
+            .stats-glass-card {
+                padding: 1rem !important;
+                border-radius: 1.5rem !important;
+                gap: 1rem !important;
+            }
+
+            /* Secciones - Reducir padding vertical */
+            section {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+
+            /* Touch targets - Asegurar mínimo 44px */
+            button,
+            a.discord-link {
+                min-height: 44px !important;
+                min-width: 44px !important;
+                padding: 0.75rem 1.5rem !important;
+            }
+
+            /* Reducir blur para mejor performance */
+            .stats-glass-card,
+            nav {
+                backdrop-filter: blur(10px) !important;
+            }
+
+            /* Grid de staff - 1 columna en móvil pequeño */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            /* Navbar - Ajustar spacing */
+            nav {
+                padding: 0.75rem 1rem !important;
+            }
+
+            /* Text sizes - Hacer más pequeños */
+            .text-6xl {
+                font-size: 2.5rem !important;
+                /* 40px */
+            }
+
+            .text-4xl {
+                font-size: 1.75rem !important;
+                /* 28px */
+            }
+
+            .text-2xl {
+                font-size: 1.25rem !important;
+                /* 20px */
+            }
+
+            /* Reducir espaciado de gaps */
+            .gap-10 {
+                gap: 1rem !important;
+            }
+
+            .gap-8 {
+                gap: 0.75rem !important;
+            }
+
+            .gap-6 {
+                gap: 0.5rem !important;
+            }
+        }
+
+        /* ==========================================
+           MOBILE STANDARD (481px - 768px)
+           ========================================== */
+        @media (min-width: 481px) and (max-width: 768px) {
+
+            /* Hero section */
+            .image-logo {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            h1 {
+                font-size: 3.5rem !important;
+                /* ~56px */
+                line-height: 1.1 !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+
+            .stats-glass-card {
+                padding: 1.5rem !important;
+                border-radius: 2rem !important;
+            }
+
+            section {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+
+            /* Touch targets */
+            button,
+            a.discord-link {
+                min-height: 44px !important;
+            }
+
+            .text-6xl {
+                font-size: 3rem !important;
+                /* 48px */
+            }
+        }
+
+        /* ==========================================
+           TABLET & BELOW (max-width: 1024px)
+           ========================================== */
         @media (max-width: 1024px) {
 
             #custom-cursor,
@@ -498,7 +670,21 @@
             #mobile-menu-btn {
                 display: flex !important;
             }
+
+            /* Desactivar animaciones costosas en tablet/móvil */
+            .orb,
+            .parallax-element {
+                animation: none !important;
+                transform: none !important;
+            }
+
+            /* Reducir intensidad de efectos */
+            .stats-glass-card:hover,
+            .dimension-card:hover {
+                transform: translateY(-4px) !important;
+            }
         }
+
 
         /* Mobile Menu Button */
         #mobile-menu-btn {
@@ -753,17 +939,20 @@
                     class="w-full h-full object-cover rounded-full bg-black">
             </div>
 
-            <h1 class="text-7xl md:text-[9rem] font-black font-heading leading-none tracking-tighter mb-12">
+            <h1
+                class="text-5xl sm:text-6xl md:text-7xl lg:text-[9rem] font-black font-heading leading-none tracking-tighter mb-6 md:mb-12">
                 <span class="dynamic-text block">PIENSA.</span>
                 <span class="dynamic-text block">CONECTA.</span>
             </h1>
 
-            <p class="max-w-xl text-lg text-gray-300 font-light leading-relaxed mb-12">
+            <p
+                class="max-w-xl text-sm sm:text-base md:text-lg text-gray-300 font-light leading-relaxed mb-6 md:mb-12 px-2">
                 La frontera final entre la <span class="text-violet-400">psique</span> y la <span
                     class="text-cyan-400">evolución digital</span>.
             </p>
 
-            <div class="stats-glass-card p-6 md:p-8 rounded-[40px] flex flex-col md:flex-row items-center gap-10">
+            <div
+                class="stats-glass-card p-4 sm:p-6 md:p-8 rounded-2xl md:rounded-[40px] flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-10 w-full max-w-2xl">
                 <div id="user-avatars" class="flex -space-x-4 items-center pl-2 md:pl-0">
                 </div>
                 <div
@@ -773,10 +962,17 @@
                         <span class="text-violet-400 font-bold text-sm uppercase tracking-[0.2em]">miembros</span>
                     </div>
                     <div
-                        class="flex flex-wrap gap-4 mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest justify-center md:justify-start">
+                        class="flex flex-wrap gap-4 mt-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest justify-center md:justify-start items-center">
                         <span>Bots: <b id="total-bots" class="text-white">...</b></span>
                         <span class="opacity-20">|</span>
-                        <span>Boost: <b id="boost-lvl" class="text-white">...</b></span>
+                        <span class="flex items-center gap-2">
+                            <img id="boost-image" src="public/img/boost/boost.png" alt="Boost"
+                                class="w-15 h-10 transition-opacity duration-200"
+                                onmouseover="this.src='public/img/boost/boost.gif'"
+                                onmouseout="this.src='public/img/boost/boost.png'" />
+                            Boost: <b id="boost-lvl" class="text-white">...</b> / <b id="boost-number"
+                                class="text-white">...</b>
+                        </span>
                         <span class="opacity-20">|</span>
                         <span>Status: <b id="db-status" class="text-red-500">Wait</b></span>
                     </div>
@@ -786,15 +982,17 @@
        SECCIÓN: EL SERVER Y SU EQUIPO
        Presentación de la comunidad y grid interactivo del staff.
     -->
-        <section id="about" class="py-12 container mx-auto px-4 md:px-6 section-reveal">
-            <h2 class="text-4xl font-black mb-10 text-center tracking-widest uppercase opacity-20">El Server y su Equipo
+        <section id="about" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6 section-reveal">
+            <h2
+                class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
+                El Server y su Equipo
             </h2>
 
             <!-- 
            DASHBOARD DE STAFF
            Contenedor único que alterna entre la vista de lista y el detalle ampliado.
         -->
-            <div class="stats-glass-card p-5 md:p-10 rounded-[40px] relative overflow-hidden">
+            <div class="stats-glass-card p-4 sm:p-5 md:p-10 rounded-2xl md:rounded-[40px] relative overflow-hidden">
                 <!-- VISTA PRINCIPAL (Grid de miembros) -->
                 <div id="staff-main-view" class="transition-all duration-700">
                     <div class="flex flex-col lg:flex-row gap-8 lg:gap-0">
@@ -1143,32 +1341,35 @@
        SECCIÓN: PILARES
        Los tres pilares fundamentales de Psicosofia con expansión animada.
     -->
-            <section id="pilares" class="py-12 container mx-auto px-4 md:px-6">
-                <h2 class="text-4xl font-black mb-10 text-center tracking-widest uppercase opacity-20">Nuestros Pilares
+            <section id="pilares" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6">
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
+                    Nuestros Pilares
                 </h2>
-                <div id="pillars-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10 transition-all duration-700">
+                <div id="pillars-grid"
+                    class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 transition-all duration-700">
                     <div onclick="expandPillar('psicologia')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
+                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-violet-500 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             01</div>
-                        <h3 class="text-3xl font-bold mb-6 font-heading">Bienestar</h3>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Bienestar</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">Psicología, apoyo y equilibrio mental.</p>
                     </div>
                     <div onclick="expandPillar('filosofia')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
+                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-cyan-400 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             02</div>
-                        <h3 class="text-3xl font-bold mb-6 font-heading">Sabiduría</h3>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Sabiduría</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">Filosofía, reflexión y debate ético.</p>
                     </div>
                     <div onclick="expandPillar('letras')"
-                        class="pillar-card p-8 md:p-12 rounded-[50px] stats-glass-card group block text-center">
+                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
                         <div
                             class="text-white text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
                             03</div>
-                        <h3 class="text-3xl font-bold mb-6 font-heading">Expresión</h3>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Expresión</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">Literatura, poesía y oratoria libre.</p>
                     </div>
                 </div>
@@ -1238,11 +1439,13 @@
            SECCIÓN: MOMENTOS DE OCIO
            Presenta las actividades recreativas de la comunidad.
         -->
-            <section id="ocio" class="py-12 container mx-auto px-4 md:px-6 section-reveal">
-                <h2 class="text-4xl font-black mb-10 text-center tracking-widest uppercase opacity-20">Momentos de Ocio
+            <section id="ocio" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6 section-reveal">
+                <h2
+                    class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
+                    Momentos de Ocio
                 </h2>
 
-                <div class="stats-glass-card rounded-[50px] overflow-hidden relative group">
+                <div class="stats-glass-card rounded-3xl md:rounded-[50px] overflow-hidden relative group">
                     <!-- Overlay de gradiente cinemático -->
                     <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10"></div>
 
@@ -1387,6 +1590,7 @@
             get totalHumans() { return document.getElementById('total-humans'); },
             get totalBots() { return document.getElementById('total-bots'); },
             get boostLvl() { return document.getElementById('boost-lvl'); },
+            get boostNumber() { return document.getElementById('boost-number'); },
             get dbStatus() { return document.getElementById('db-status'); },
             get statusIndicator() { return document.getElementById('status-indicator'); },
             get userAvatars() { return document.getElementById('user-avatars'); },
@@ -1440,10 +1644,13 @@
                     const totalHumans = domCache.totalHumans;
                     const totalBots = domCache.totalBots;
                     const boostLvl = domCache.boostLvl;
+                    const boostNumber = domCache.boostNumber;
 
                     if (totalHumans) totalHumans.innerText = stats.totalHumans || 0;
                     if (totalBots) totalBots.innerText = stats.totalBots || 0;
                     if (boostLvl) boostLvl.innerText = `LVL ${stats.boostLevel || 0}`;
+                    if (onlineNow) onlineNow.innerText = `${stats.onlineHumans || 0} USUARIOS ONLINE`;
+                    if (boostNumber) boostNumber.innerText = `NUM ${stats.boostNumber || 0}`;
 
                     const statusElem = domCache.dbStatus;
                     if (statusElem) {
@@ -1464,6 +1671,7 @@
                         logToTerminal(`Sync: ${discordStatus} | MongoDB Bridge (${stats.totalHumans} total)`);
                     }
 
+                    // Avatares de usuarios desde Discord Widget
                     if (discordData && discordData.members) {
                         const container = domCache.userAvatars;
                         if (container) {
