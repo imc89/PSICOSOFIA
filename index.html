@@ -512,7 +512,6 @@
         a,
         .terminal-btn {
             touch-action: manipulation;
-            cursor: pointer;
         }
 
         /* Reducir animaciones en dispositivos que lo prefieran */
@@ -1705,7 +1704,7 @@
                                 const img = document.createElement('img');
                                 img.src = member.avatar_url;
                                 img.alt = member.username;
-                                img.className = "w-14 h-14 rounded-full border-4 border-[#010204] hover:-translate-y-3 transition-all duration-500 cursor-pointer shadow-2xl relative";
+                                img.className = "w-14 h-14 rounded-full border-4 border-[#010204] hover:-translate-y-3 transition-all duration-500 shadow-2xl relative";
                                 img.style.zIndex = 10 - i;
 
                                 const showMemberName = (e) => {
