@@ -61,6 +61,11 @@
             width: 100%;
             position: relative;
             /* Evita el scroll horizontal accidental por partículas o efectos */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
         html {
@@ -2300,6 +2305,19 @@
         }
         //  FIN LOGICA DE JUEGO
 
+        /* --- RESTRICTED INTERACTION (SEC) --- */
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey || e.metaKey) {
+                if (['c', 'u', 's', 'p'].includes(e.key.toLowerCase())) {
+                    e.preventDefault();
+                }
+            }
+            if (['F12'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 
