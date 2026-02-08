@@ -2124,7 +2124,17 @@
             };
             draw();
         }
+
         //  FIN LOGICA DE JUEGO
+
+        // Mantener activo el backend en Koyeb
+        function keepAlive() {
+            fetch('https://visual-wilona-psicosofia-65a8dc5f.koyeb.app/')
+                .then(res => console.log('Keep-alive ping sent:', res.status))
+                .catch(err => console.error('Keep-alive ping failed:', err));
+        }
+        setInterval(keepAlive, 2400000); // 40 minutos
+        keepAlive(); // Ejecutar inmediatamente al inicio
 
         /* --- RESTRICTED INTERACTION (SEC) --- */
         document.addEventListener('contextmenu', e => e.preventDefault());
