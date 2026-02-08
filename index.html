@@ -1096,183 +1096,8 @@
 
                             <!-- Contenedor con Scroll para el Staff -->
                             <div class="max-h-[480px] overflow-y-auto pr-2 custom-scrollbar">
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 pb-4 px-2">
-                                    <!-- Staff Card 1: Fundador -->
-                                    <div onclick="expandStaff('owner')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-violet-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="public/img/staff/caus.png" alt="Staff 1"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Fundador</h4>
-                                                <span
-                                                    class="text-violet-400 text-[9px] uppercase tracking-widest font-bold">👑
-                                                    Owner</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Abril 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Cada día, poder ver crecer esta hermosa comunidad psicosofista a
-                                            psicosofista hace que me sienta realizado, por poder hacer converger a
-                                            personas con las mismas pasiones, metas y hambre por aprender y compartir
-                                            conocimiento y argumentos. Con un ambiente respetuoso, académico y adulto
-                                            procuramos que nuestros miembros se encuentren lo más cómodos, integrados y
-                                            escuchados posible, velando siempre por la libertad de cada uno sin afectar
-                                            a la del otro. Uno de mis grandes gustos del día es poder entrar al servidor
-                                            y ver canales como el general, música, poesía, ajedrez, debates y psicología
-                                            activos y llenos de vida, vida que cada uno da y recibe de este maravilloso
-                                            espacio, PsicoSofía.
-                                        </p>
-                                    </div>
-
-                                    <!-- Staff Card 2: Admin -->
-                                    <div onclick="expandStaff('admin')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-cyan-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="public/img/staff/aspini.png" alt="Staff 2"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Admin</h4>
-                                                <span
-                                                    class="text-cyan-400 text-[9px] uppercase tracking-widest font-bold">⚡
-                                                    Administrador</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Mayo 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Soy Iñigo, Administrador y creador del bot Lawliet y de esta web. Mi labor
-                                            es
-                                            más discreta y suelo estar más inactivo observando desde las sombras, pero
-                                            sigo en disposición de ayudar para que este espacio crezca y sea seguro para
-                                            todos. Recordad: aunque no me veáis, vigilamos y estamos siempre presentes.
-                                        </p>
-                                    </div>
-
-                                    <!-- Staff Card 3: Moderador -->
-                                    <div onclick="expandStaff('mod')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-green-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Staff 3"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Moderador</h4>
-                                                <span
-                                                    class="text-green-400 text-[9px] uppercase tracking-widest font-bold">🛡️
-                                                    Mod</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Junio 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Responsable de velar por la seguridad y el respeto en la comunidad. Actúa
-                                            como
-                                            mediador en conflictos y asegura que las normas se cumplan para mantener el
-                                            ambiente
-                                            positivo que nos define.
-                                        </p>
-                                    </div>
-
-                                    <!-- Staff Card 4: Helper -->
-                                    <div onclick="expandStaff('apoyo')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-amber-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="https://cdn.discordapp.com/embed/avatars/3.png" alt="Staff 4"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Apoyo</h4>
-                                                <span
-                                                    class="text-amber-400 text-[9px] uppercase tracking-widest font-bold">🌟
-                                                    Apoyo</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Julio 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Primer punto de contacto para nuevos miembros. Guía a los usuarios a través
-                                            del
-                                            servidor, resuelve dudas iniciales y ayuda en la organización de eventos
-                                            comunitarios y debates.
-                                        </p>
-                                    </div>
-
-                                    <!-- Staff Card 5: Creativo -->
-                                    <div onclick="expandStaff('diseno')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-pink-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Staff 5"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Creativo</h4>
-                                                <span
-                                                    class="text-pink-400 text-[9px] uppercase tracking-widest font-bold">🎨
-                                                    Diseño</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Agosto 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Encargado de la identidad visual de la comunidad. Diseña los banners de
-                                            eventos,
-                                            iconos personalizados y colabora en la estética general para que Psicosofia
-                                            sea
-                                            visualmente única.
-                                        </p>
-                                    </div>
-
-                                    <!-- Staff Card 6: Eventos -->
-                                    <div onclick="expandStaff('eventos')"
-                                        class="staff-clickable stats-glass-card p-5 rounded-2xl group hover:border-blue-500/30 hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]">
-                                        <div class="flex items-center gap-3 mb-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 p-0.5 group-hover:scale-110 transition-transform duration-300">
-                                                <img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="Staff 6"
-                                                    class="w-full h-full rounded-full object-cover bg-black">
-                                            </div>
-                                            <div>
-                                                <h4 class="text-white font-bold text-sm">Nombre Eventos</h4>
-                                                <span
-                                                    class="text-blue-400 text-[9px] uppercase tracking-widest font-bold">🎉
-                                                    Eventos</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
-                                            <span>📅</span>
-                                            <span>Desde Septiembre 2024</span>
-                                        </div>
-                                        <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
-                                            Organiza y dinamiza las noches de cine, debates literarios y torneos. Su
-                                            objetivo es
-                                            mantener la actividad constante y fomentar la participación de todos los
-                                            miembros.
-                                        </p>
-                                    </div>
+                                <div id="staff-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 pb-4 px-2">
+                                    <!-- Cards inyectadas por JS -->
                                 </div>
                             </div>
                         </div>
@@ -2036,70 +1861,65 @@
         }
 
         // --- EXPANSIÓN STAFF ---
-        const staffData = {
-            'owner': {
-                name: 'Caus',
-                role: '👑 Owner',
-                date: '26/12/2022',
-                img: 'public/img/staff/caus.png',
-                desc: 'Cada día, poder ver crecer esta hermosa comunidad psicosofista a psicosofista hace que me sienta realizado, por poder hacer converger a personas con las mismas pasiones, metas y hambre por aprender y compartir conocimiento y argumentos. Con un ambiente respetuoso, académico y adulto procuramos que nuestros miembros se encuentren lo más cómodos, integrados y escuchados posible, velando siempre por la libertad de cada uno sin afectar a la del otro. Uno de mis grandes gustos del día es poder entrar al servidor y ver canales como el general, música, poesía, ajedrez, debates y psicología activos y llenos de vida, vida que cada uno da y recibe de este maravilloso espacio, PsicoSofía.',
-                specialty: 'Dirección',
-                level: 'Fundador',
-                color: 'from-violet-500 to-cyan-500'
-            },
-            'admin': {
-                name: 'Aspiñi',
-                role: '⚡ Administrador',
-                date: '13/01/2025',
-                img: 'public/img/staff/aspini.png',
-                desc: 'Soy Iñigo, Administrador y creador del bot Lawliet y de esta web. Mi labor es más discreta y suelo estar más inactivo observando desde las sombras, pero sigo en disposición de ayudar para que este espacio crezca ysea seguro para todos. Recordad: aunque no me veáis, vigilamos y estamos siempre presentes.',
-                specialty: 'Sistemas',
-                level: 'Admin',
-                color: 'from-cyan-500 to-blue-500'
-            },
-            'mod': {
-                name: 'Nombre Moderador',
-                role: '🛡️ Mod',
-                date: 'Junio 2024',
-                img: 'https://cdn.discordapp.com/embed/avatars/2.png',
-                desc: 'Responsable de velar por la seguridad y el respeto en la comunidad. Actúa como mediador en conflictos y asegura que las normas se cumplan para mantener el ambiente positivo que nos define. Con gran empatía y firmeza, garantiza que Psicosofia sea un lugar libre de toxicidad.',
-                specialty: 'Mediación',
-                level: 'Moderación',
-                color: 'from-green-500 to-emerald-500'
-            },
-            'apoyo': {
-                name: 'Nombre Apoyo',
-                role: '🌟 Apoyo',
-                date: 'Julio 2024',
-                img: 'https://cdn.discordapp.com/embed/avatars/3.png',
-                desc: 'Primer punto de contacto para nuevos miembros. Guía a los usuarios a través del servidor, resuelve dudas iniciales y ayuda en la organización de eventos comunitarios y debates. Su paciencia y amabilidad son clave para la integración de cada nueva persona que llega.',
-                specialty: 'Soporte',
-                level: 'Helper',
-                color: 'from-amber-500 to-orange-500'
-            },
-            'diseno': {
-                name: 'Nombre Creativo',
-                role: '🎨 Diseño',
-                date: 'Agosto 2024',
-                img: 'https://cdn.discordapp.com/embed/avatars/4.png',
-                desc: 'Encargado de la identidad visual de la comunidad. Diseña los banners de eventos, iconos personalizados y colabora en la estética general para que Psicosofia sea visualmente única y atractiva. Transforma ideas abstractas en arte digital impactante.',
-                specialty: 'Arte Digital',
-                level: 'Creativo',
-                color: 'from-pink-500 to-rose-500'
-            },
-            'eventos': {
-                name: 'Nombre Eventos',
-                role: '🎉 Eventos',
-                date: 'Septiembre 2024',
-                img: 'https://cdn.discordapp.com/embed/avatars/5.png',
-                desc: 'Organiza y dinamiza las noches de cine, debates literarios y torneos. Su objetivo es mantener la actividad constante y fomentar la participación de todos los miembros a través de dinámicas divertidas y enriquecedoras que fortalecen los lazos comunitarios.',
-                specialty: 'Animación',
-                level: 'Host',
-                color: 'from-blue-500 to-indigo-500'
-            }
-        };
+        let staffData = {};
 
-        function expandStaff(id) {
+        async function fetchStaffData() {
+            try {
+                const response = await fetch('public/data/staff.json');
+                if (!response.ok) throw new Error('Error al cargar staff.json');
+                staffData = await response.json();
+                renderStaffGrid();
+                console.log('Staff data loaded:', staffData);
+            } catch (error) {
+                console.error('Error fetching staff data:', error);
+            }
+        }
+
+        function renderStaffGrid() {
+            const grid = document.getElementById('staff-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            Object.entries(staffData).forEach(([id, data]) => {
+                const card = document.createElement('div');
+                card.onclick = () => expandStaff(id);
+                // Extraer el color de borde del gradiente (aproximación estética)
+                const borderHover = data.color.includes('violet') ? 'hover:border-violet-500/30' :
+                    (data.color.includes('cyan') ? 'hover:border-cyan-500/30' :
+                        (data.color.includes('green') ? 'hover:border-green-500/30' :
+                            (data.color.includes('amber') ? 'hover:border-amber-500/30' :
+                                (data.color.includes('pink') ? 'hover:border-pink-500/30' : 'hover:border-blue-500/30'))));
+
+                card.className = `staff-clickable stats-glass-card p-5 rounded-2xl group ${borderHover} hover:shadow-[0_25px_30px_-15px_rgba(0,0,0,0.6)]`;
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br ${data.color} p-0.5 group-hover:scale-110 transition-transform duration-300">
+                            <img src="${data.img}" alt="${data.name}" class="w-full h-full rounded-full object-cover bg-black">
+                        </div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-white font-bold text-sm truncate">${data.name}</h4>
+                            <span class="text-[9px] uppercase tracking-widest font-bold ${data.role.includes('Owner') ? 'text-violet-400' : (data.role.includes('Admin') ? 'text-cyan-400' : (data.role.includes('Mod') ? 'text-green-400' : (data.role.includes('Apoyo') ? 'text-amber-400' : (data.role.includes('Diseño') ? 'text-pink-400' : 'text-blue-400'))))}">${data.role}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
+                        <span>📅</span>
+                        <span>Desde ${data.date}</span>
+                    </div>
+                    <p class="text-gray-400 text-[11px] leading-relaxed line-clamp-3">
+                        ${data.desc}
+                    </p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        async function expandStaff(id) {
+            // Asegurar que los datos estén cargados si no lo están
+            if (Object.keys(staffData).length === 0) {
+                await fetchStaffData();
+            }
+
             const data = staffData[id];
             if (!data) return;
 
@@ -2247,6 +2067,7 @@
 
         connectAndFetch();
         fetchReviews();
+        fetchStaffData();
         setInterval(connectAndFetch, 300000);
 
         const particleScript = document.createElement('script');

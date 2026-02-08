@@ -493,14 +493,18 @@
         }
 
         async function fetchHistoricalBillboard() {
-            const fallbackHistorical = [
-                { film: "Descifrando Enigma", date: " 05/04/25", poster: "https://media.themoviedb.org/t/p/w440_and_h660_face/7PZSbbZbCfiXDNB6HMLY66xHTPK.jpg" },
-                { film: "Fight Club", date: "19-02-2025", poster: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7Qf4n6a8MIx.jpg" },
-
-            ];
-            renderGrid(fallbackHistorical, 'movies-grid');
-
-
+            try {
+                const response = await fetch('public/data/historical_films.json');
+                if (!response.ok) throw new Error('Error al cargar historical_films.json');
+                const films = await response.json();
+                renderGrid(films, 'movies-grid');
+            } catch (error) {
+                console.error('Historical billboard fetch failed:', error);
+                const fallbackHistorical = [
+                    { film: "Descifrando Enigma", date: " 05/04/25", poster: "https://media.themoviedb.org/t/p/w440_and_h660_face/7PZSbbZbCfiXDNB6HMLY66xHTPK.jpg" }
+                ];
+                renderGrid(fallbackHistorical, 'movies-grid');
+            }
         }
 
         function setupFeaturedFilm(filmData) {
@@ -525,10 +529,18 @@
         }
 
         async function fetchSeriesData() {
-            const fallbackSeries = [
-                { serie: "Death Note", date: "05-02-2025", poster: "https://image.tmdb.org/t/p/original/bCKIMUHwRTRPbh6o7T3Ud50suWT.jpg" },
-            ];
-            renderGrid(fallbackSeries, 'series-grid');
+            try {
+                const response = await fetch('public/data/historical_series.json');
+                if (!response.ok) throw new Error('Error al cargar historical_series.json');
+                const series = await response.json();
+                renderGrid(series, 'series-grid');
+            } catch (error) {
+                console.error('Series data fetch failed:', error);
+                const fallbackSeries = [
+                    { serie: "Death Note", date: "05-02-2025", poster: "https://image.tmdb.org/t/p/original/bCKIMUHwRTRPbh6o7T3Ud50suWT.jpg" }
+                ];
+                renderGrid(fallbackSeries, 'series-grid');
+            }
         }
 
         function renderGrid(items, containerId) {
