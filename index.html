@@ -73,8 +73,8 @@
         }
 
         html {
-            overflow-x: hidden;
             width: 100%;
+            /* Eliminar overflow-x de html para evitar bloqueos en iOS */
         }
 
         .font-heading {
@@ -625,6 +625,11 @@
             .grid {
                 grid-template-columns: 1fr !important;
                 gap: 1rem !important;
+            }
+
+            /* FORCE SCROLL: Asegurar que TODO elemento permita scroll vertical */
+            * {
+                touch-action: pan-y !important;
             }
 
             /* Navbar - Ajustar spacing */
