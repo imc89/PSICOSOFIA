@@ -920,6 +920,35 @@
                 background: rgba(255, 255, 255, 0.03) !important;
             }
         }
+
+        /* FIX SCROLL iOS */
+        @media (hover: none) and (pointer: coarse) {
+
+            /* FIX 1: Send blocking overlays to background */
+            .bg-canvas,
+            #particles-js,
+            .orb {
+                display: block !important;
+                z-index: -1 !important;
+                pointer-events: none !important;
+            }
+
+            #cursor-aura {
+                display: none !important;
+            }
+
+            /* FIX 2: Avoid nested scroll issues */
+            .custom-scrollbar {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            /* FIX 3: Restore touch gesture detection */
+            body {
+                -webkit-user-select: text;
+                user-select: text;
+            }
+        }
     </style>
 </head>
 
