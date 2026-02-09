@@ -542,13 +542,13 @@
             touch-action: auto;
         }
 
-        /* Elementos clickeables - permitir scroll mientras se mantiene click */
+        /* Elements clickeables - permitir scroll mientras se mantiene click */
         .staff-clickable,
         .pillar-card,
         button,
         a,
         .terminal-btn {
-            touch-action: manipulation;
+            touch-action: auto;
         }
 
         /* Reducir animaciones en dispositivos que lo prefieran */
@@ -914,70 +914,55 @@
         }
 
         /* ==========================================
-           FIX UNIVERSAL DE SCROLL (CRÍTICO) - COLOCADO AL FINAL
+           SURGICAL MOBILE SCROLL & OVERLAY FIX
            ========================================== */
-        @media (hover: none),
-        (pointer: coarse),
+        @media (hover: none) and (pointer: coarse),
         (max-width: 1024px) {
-            * {
-                touch-action: auto !important;
-                cursor: auto !important;
-                /* Desactivar cursor pointer en móvil */
-            }
 
-            /* Desactivar hovers en móvil */
-            .stats-glass-card:hover,
-            .dimension-card:hover,
-            .pillar-card:hover,
-            .terminal-btn:hover {
-                transform: none !important;
-                box-shadow: none !important;
-                background: rgba(255, 255, 255, 0.03) !important;
-            }
-        }
-
-        /* FIX SCROLL iOS */
-        @media (hover: none) and (pointer: coarse) {
-
-            /* FIX 1: Send blocking overlays to background */
-            .bg-canvas,
-            #particles-js,
-            .orb {
-                display: block !important;
-                z-index: -10 !important;
-                pointer-events: none !important;
-            }
-
-            #cursor-aura {
-                display: none !important;
-            }
-
-            /* FIX 2: Restore internal scroll (User requested) */
-            .custom-scrollbar {
-                max-height: 480px !important;
-                /* Re-apply max height for mobile scroll */
-                overflow-y: auto !important;
-                -webkit-overflow-scrolling: touch;
-                /* Essential for smooth iOS scroll */
-            }
-
-            /* FIX 3: Restore touch gesture detection & Agile Scroll */
+            /* 1. Global Containers: Ultimate Liquid Scroll */
             html,
             body {
-                -webkit-user-select: text;
-                user-select: text;
-                touch-action: auto !important;
-                overflow-y: auto !important;
                 height: auto !important;
-                min-height: 100% !important;
-                position: relative !important;
+                min-height: 101% !important;
+                overflow-y: auto !important;
+                touch-action: auto !important;
                 -webkit-overflow-scrolling: touch !important;
             }
 
-            /* FIX 4: Ensure background wrapper is completely invisible to gestures */
-            .fixed.inset-0 {
+            /* 2. Absolute Gesture Transparency for Backgrounds */
+            .bg-canvas,
+            #particles-js,
+            .orb {
+                position: fixed !important;
+                inset: 0 !important;
                 pointer-events: none !important;
                 z-index: -100 !important;
+                display: block !important;
+            }
+
+            /* 3. Restore aesthetics with caution */
+            nav,
+            .stats-glass-card {
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                background: rgba(255, 255, 255, 0.03) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            }
+
+            /* 4. Remove Nested Scroll Traps */
+            .custom-scrollbar {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            /* 5. UI Cleanup */
+            #cursor-aura,
+            #cursor-label {
+                display: none !important;
+            }
+
+            #mobile-drawer-overlay:not(.active) {
+                display: none !important;
             }
         }
     </style>
@@ -993,15 +978,11 @@
     <div id="cursor-aura"></div>
     <div id="cursor-label"></div>
 
-    <!-- Fondo de malla y orbes animados (WRAPPED FOR OVERFLOW PROTECTION) -->
-    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-50"
-        style="pointer-events: none !important;">
-        <div class="bg-canvas" style="pointer-events: none !important;"></div>
-        <!-- Orbes ocultos en móvil por CSS media query -->
-        <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
-        <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
-        <div id="particles-js" style="pointer-events: none !important;"></div>
-    </div>
+    <!-- Fondo de malla y orbes animados (Direct children for better gesture pass-through) -->
+    <div class="bg-canvas"></div>
+    <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
+    <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
+    <div id="particles-js"></div>
 
 
     <!-- 
