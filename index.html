@@ -74,7 +74,8 @@
 
         html {
             width: 100%;
-            /* Eliminar overflow-x de html para evitar bloqueos en iOS */
+            scroll-padding-top: 100px;
+            /* Evita que el navbar tape los títulos al navegar */
         }
 
         .font-heading {
@@ -638,13 +639,18 @@
                 padding: 0.75rem 1rem !important;
             }
 
-            padding: 0.75rem 1rem !important;
-        }
+            /* Fix Text sizes mobile */
+            .text-6xl {
+                font-size: 2.5rem !important;
+            }
 
-        /* Text sizes - Hacer más pequeños */
-        .text-6xl {
-            font-size: 2.5rem !important;
-            /* 40px */
+            .text-4xl {
+                font-size: 1.75rem !important;
+            }
+
+            .text-2xl {
+                font-size: 1.25rem !important;
+            }
         }
 
         .text-4xl {
@@ -2083,6 +2089,16 @@
             overlay.classList.toggle('active');
             document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
         }
+
+        /* Auto-cerrar menú móvil al hacer click en un enlace */
+        document.querySelectorAll('#mobile-drawer a').forEach(link => {
+            link.addEventListener('click', () => {
+                const drawer = document.getElementById('mobile-drawer');
+                if (drawer.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
 
         async function fetchReviews() {
             try {
