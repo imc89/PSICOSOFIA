@@ -535,20 +535,13 @@
 
 
 
-        /* Permitir scroll libre en contenedores principales */
-        main,
-        section,
-        .stats-glass-card {
-            touch-action: auto;
-        }
-
-        /* Elements clickeables - permitir scroll mientras se mantiene click */
+        /* Elements clickeables */
         .staff-clickable,
         .pillar-card,
         button,
         a,
         .terminal-btn {
-            touch-action: auto;
+            cursor: pointer;
         }
 
         /* Reducir animaciones en dispositivos que lo prefieran */
@@ -579,24 +572,6 @@
             h1 {
                 font-size: 2.5rem !important;
                 /* ~40px en lugar de 7xl */
-                line-height: 1.1 !important;
-                margin-bottom: 1.5rem !important;
-            }
-
-            h2 {
-                font-size: 1.75rem !important;
-                /* ~28px */
-                margin-bottom: 1.5rem !important;
-            }
-
-            h3 {
-                font-size: 1.25rem !important;
-                /* ~20px */
-            }
-
-            /* Stats card - Layout vertical compacto */
-            .stats-glass-card {
-                padding: 1rem !important;
                 border-radius: 1.5rem !important;
                 gap: 1rem !important;
             }
@@ -628,10 +603,7 @@
                 gap: 1rem !important;
             }
 
-            /* RESTORE NATIVE SCROLL: Eliminar restricciones de touch-action */
-            * {
-                touch-action: auto !important;
-            }
+            /* RESTORE NATIVE SCROLL: Removed redundant touch-action: auto !important; */
 
 
             /* Navbar - Ajustar spacing */
@@ -914,50 +886,53 @@
         }
 
         /* ==========================================
-           SURGICAL MOBILE SCROLL & OVERLAY FIX
+           DEFINITIVE MOBILE SCROLL FIX
+           (Zero Restrictions, Absolute Expansion)
            ========================================== */
-        @media (hover: none) and (pointer: coarse),
-        (max-width: 1024px) {
+        @media (max-width: 1024px) {
 
-            /* 1. Global Containers: Ultimate Liquid Scroll */
+            /* 1. Force Browser-Native Scroll Engagement */
             html,
             body {
                 height: auto !important;
-                min-height: 101% !important;
+                min-height: 101vh !important;
                 overflow-y: auto !important;
-                touch-action: auto !important;
                 -webkit-overflow-scrolling: touch !important;
+                touch-action: auto !important;
             }
 
-            /* 2. Absolute Gesture Transparency for Backgrounds */
+            /* 2. Kill Nested Scrolls (Expansion Strategy) */
+            .custom-scrollbar,
+            #reviews-container,
+            .overflow-y-auto {
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            /* 3. Background Ghosting (Directly Layered) */
             .bg-canvas,
             #particles-js,
             .orb {
                 position: fixed !important;
                 inset: 0 !important;
                 pointer-events: none !important;
-                z-index: -100 !important;
-                display: block !important;
+                z-index: -10 !important;
             }
 
-            /* 3. Restore aesthetics with caution */
+            /* 4. Filter Restoration (with Safe Layout) */
             nav,
             .stats-glass-card {
                 backdrop-filter: blur(20px) !important;
                 -webkit-backdrop-filter: blur(20px) !important;
-                background: rgba(255, 255, 255, 0.03) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            }
-
-            /* 4. Remove Nested Scroll Traps */
-            .custom-scrollbar {
-                max-height: none !important;
-                overflow: visible !important;
+                background: rgba(10, 10, 10, 0.8) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
 
             /* 5. UI Cleanup */
             #cursor-aura,
-            #cursor-label {
+            #cursor-label,
+            #custom-cursor {
                 display: none !important;
             }
 
