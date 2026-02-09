@@ -675,7 +675,6 @@
         .gap-6 {
             gap: 0.5rem !important;
         }
-        }
 
         /* ==========================================
            MOBILE STANDARD (481px - 768px)
@@ -866,7 +865,21 @@
         }
 
         ::-webkit-scrollbar {
-            width: 0;
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(124, 58, 237, 0.4);
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 58, 237, 0.7);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
 
         /* Estilos terminal interactiva */
@@ -931,7 +944,7 @@
             #particles-js,
             .orb {
                 display: block !important;
-                z-index: -1 !important;
+                z-index: -10 !important;
                 pointer-events: none !important;
             }
 
@@ -948,10 +961,22 @@
                 /* Essential for smooth iOS scroll */
             }
 
-            /* FIX 3: Restore touch gesture detection */
+            /* FIX 3: Restore touch gesture detection & Agile Scroll */
+            html,
             body {
                 -webkit-user-select: text;
                 user-select: text;
+                touch-action: pan-y !important;
+                /* Force agile scroll engagement */
+                overflow-y: auto !important;
+                height: auto !important;
+                position: relative !important;
+            }
+
+            /* FIX 4: Ensure background wrapper is completely invisible to gestures */
+            .fixed.inset-0 {
+                pointer-events: none !important;
+                z-index: -100 !important;
             }
         }
     </style>
@@ -1295,202 +1320,200 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            <!-- 
+        </section>
+        <!-- 
        SECCIÓN: PILARES
        Los tres pilares fundamentales de Psicosofia con expansión animada.
     -->
-            <section id="pilares" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6">
-                <h2
-                    class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
-                    Nuestros Pilares
-                </h2>
-                <div id="pillars-grid"
-                    class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 transition-all duration-700">
-                    <div onclick="expandPillar('psicologia')"
-                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
-                        <div
-                            class="text-violet-500 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
-                            01</div>
-                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Bienestar</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Psicología, apoyo y equilibrio mental.</p>
-                    </div>
-                    <div onclick="expandPillar('filosofia')"
-                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
-                        <div
-                            class="text-cyan-400 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
-                            02</div>
-                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Sabiduría</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Filosofía, reflexión y debate ético.</p>
-                    </div>
-                    <div onclick="expandPillar('letras')"
-                        class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
-                        <div
-                            class="text-white text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
-                            03</div>
-                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Expresión</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Literatura, poesía y oratoria libre.</p>
+        <section id="pilares" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6">
+            <h2
+                class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
+                Nuestros Pilares
+            </h2>
+            <div id="pillars-grid"
+                class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 transition-all duration-700">
+                <div onclick="expandPillar('psicologia')"
+                    class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
+                    <div
+                        class="text-violet-500 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                        01</div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Bienestar</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Psicología, apoyo y equilibrio mental.</p>
+                </div>
+                <div onclick="expandPillar('filosofia')"
+                    class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
+                    <div
+                        class="text-cyan-400 text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                        02</div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Sabiduría</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Filosofía, reflexión y debate ético.</p>
+                </div>
+                <div onclick="expandPillar('letras')"
+                    class="pillar-card p-6 sm:p-8 md:p-12 rounded-3xl md:rounded-[50px] stats-glass-card group block text-center">
+                    <div
+                        class="text-white text-6xl mb-8 font-heading font-bold opacity-50 group-hover:opacity-100 transition-opacity">
+                        03</div>
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 font-heading">Expresión</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Literatura, poesía y oratoria libre.</p>
+                </div>
+            </div>
+
+            <div id="pillar-details" class="hidden opacity-0 scale-95 transition-all duration-700">
+                <div id="detail-psicologia" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
+                    <button onclick="closePillar()"
+                        class="absolute top-10 right-10 text-violet-400 uppercase text-[10px] font-bold tracking-widest hover:text-white transition-colors">
+                        Volver a los Pilares
+                    </button>
+                    <div class="flex flex-col md:flex-row gap-12">
+                        <div class="text-violet-500 text-7xl font-bold font-heading">01</div>
+                        <div>
+                            <h3 class="text-5xl font-black font-heading mb-6">Bienestar Mental</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                                Investigamos la profundidad de la mente humana. Desde la psicología cognitiva hasta
+                                el
+                                bienestar emocional en la era digital, proporcionamos recursos y apoyo para navegar
+                                las
+                                complejidades de la psique.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div id="pillar-details" class="hidden opacity-0 scale-95 transition-all duration-700">
-                    <div id="detail-psicologia"
-                        class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
-                        <button onclick="closePillar()"
-                            class="absolute top-10 right-10 text-violet-400 uppercase text-[10px] font-bold tracking-widest hover:text-white transition-colors">
-                            Volver a los Pilares
-                        </button>
-                        <div class="flex flex-col md:flex-row gap-12">
-                            <div class="text-violet-500 text-7xl font-bold font-heading">01</div>
-                            <div>
-                                <h3 class="text-5xl font-black font-heading mb-6">Bienestar Mental</h3>
-                                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                                    Investigamos la profundidad de la mente humana. Desde la psicología cognitiva hasta
-                                    el
-                                    bienestar emocional en la era digital, proporcionamos recursos y apoyo para navegar
-                                    las
-                                    complejidades de la psique.
-                                </p>
-                            </div>
+                <div id="detail-filosofia" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
+                    <button onclick="closePillar()"
+                        class="absolute top-10 right-10 text-cyan-400 uppercase text-[10px] font-bold tracking-widest hover:text-white transition-colors">
+                        Volver a los Pilares
+                    </button>
+                    <div class="flex flex-col md:flex-row gap-12">
+                        <div class="text-cyan-400 text-7xl font-bold font-heading">02</div>
+                        <div>
+                            <h3 class="text-5xl font-black font-heading mb-6">Sabiduría Universal</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                                Debatimos las grandes preguntas que han dado forma a la civilización. Un espacio
+                                para la
+                                ética, el pensamiento crítico y la reflexión sobre nuestro lugar en un mundo cada
+                                vez
+                                más
+                                tecnológico.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <div id="detail-filosofia" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
-                        <button onclick="closePillar()"
-                            class="absolute top-10 right-10 text-cyan-400 uppercase text-[10px] font-bold tracking-widest hover:text-white transition-colors">
-                            Volver a los Pilares
-                        </button>
-                        <div class="flex flex-col md:flex-row gap-12">
-                            <div class="text-cyan-400 text-7xl font-bold font-heading">02</div>
-                            <div>
-                                <h3 class="text-5xl font-black font-heading mb-6">Sabiduría Universal</h3>
-                                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                                    Debatimos las grandes preguntas que han dado forma a la civilización. Un espacio
-                                    para la
-                                    ética, el pensamiento crítico y la reflexión sobre nuestro lugar en un mundo cada
-                                    vez
-                                    más
-                                    tecnológico.
-                                </p>
-                            </div>
+                <div id="detail-letras" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
+                    <button onclick="closePillar()"
+                        class="absolute top-10 right-10 text-white uppercase text-[10px] font-bold tracking-widest hover:text-violet-400 transition-colors">
+                        Volver a los Pilares
+                    </button>
+                    <div class="flex flex-col md:flex-row gap-12">
+                        <div class="text-white text-7xl font-bold font-heading">03</div>
+                        <div>
+                            <h3 class="text-5xl font-black font-heading mb-6">Expresión Libre</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                                La voz del alma a través de las letras. Literatura, poesía y oratoria libre como
+                                herramientas de evolución personal y conexión colectiva.
+                            </p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div id="detail-letras" class="detail-view hidden stats-glass-card p-12 rounded-[50px] relative">
-                        <button onclick="closePillar()"
-                            class="absolute top-10 right-10 text-white uppercase text-[10px] font-bold tracking-widest hover:text-violet-400 transition-colors">
-                            Volver a los Pilares
-                        </button>
-                        <div class="flex flex-col md:flex-row gap-12">
-                            <div class="text-white text-7xl font-bold font-heading">03</div>
-                            <div>
-                                <h3 class="text-5xl font-black font-heading mb-6">Expresión Libre</h3>
-                                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                                    La voz del alma a través de las letras. Literatura, poesía y oratoria libre como
-                                    herramientas de evolución personal y conexión colectiva.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-
-            <!-- 
+        <!-- 
            SECCIÓN: MOMENTOS DE OCIO
            Presenta las actividades recreativas de la comunidad.
         -->
-            <section id="ocio" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6 section-reveal">
-                <h2
-                    class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
-                    Momentos de Ocio
-                </h2>
+        <section id="ocio" class="py-6 sm:py-8 md:py-12 container mx-auto px-4 md:px-6 section-reveal">
+            <h2
+                class="text-2xl sm:text-3xl md:text-4xl font-black mb-6 md:mb-10 text-center tracking-widest uppercase opacity-20">
+                Momentos de Ocio
+            </h2>
 
-                <div class="stats-glass-card rounded-3xl md:rounded-[50px] overflow-hidden relative group">
-                    <!-- Overlay de gradiente cinemático -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10"></div>
+            <div class="stats-glass-card rounded-3xl md:rounded-[50px] overflow-hidden relative group">
+                <!-- Overlay de gradiente cinemático -->
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent z-10"></div>
 
-                    <!-- Imagen/Fondo visual (Placeholder para arte cinemático) -->
-                    <div class="absolute inset-0 z-0">
-                        <div
-                            class="w-full h-full bg-[url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop')] bg-cover bg-center transition-all duration-1000 group-hover:scale-110 opacity-40">
-                        </div>
-                    </div>
-
+                <!-- Imagen/Fondo visual (Placeholder para arte cinemático) -->
+                <div class="absolute inset-0 z-0">
                     <div
-                        class="relative z-20 p-6 md:p-20 flex flex-col items-center md:items-start text-center md:text-left mx-auto md:mx-0 max-w-2xl">
-                        <div class="text-violet-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4">Cine &
-                            Comunidad
-                        </div>
-                        <h3 class="text-4xl md:text-6xl font-black font-heading text-white mb-8 leading-tight">
-                            Más allá de la mente, <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">el
-                                Séptimo Arte.</span>
-                        </h3>
-                        <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-10">
-                            En Psicosofia no todo es introspección. Nos reunimos para vivir historias, analizar el
-                            lenguaje
-                            cinematográfico y compartir palomitas en nuestras noches de cine semanales.
-                        </p>
-                        <a href="ocio.html"
-                            class="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all duration-500 hover:scale-105 shadow-2xl">
-                            Ver Cartelera
-                        </a>
+                        class="w-full h-full bg-[url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop')] bg-cover bg-center transition-all duration-1000 group-hover:scale-110 opacity-40">
                     </div>
                 </div>
-            </section>
 
-            <!-- 
+                <div
+                    class="relative z-20 p-6 md:p-20 flex flex-col items-center md:items-start text-center md:text-left mx-auto md:mx-0 max-w-2xl">
+                    <div class="text-violet-400 font-bold uppercase tracking-[0.5em] text-[10px] mb-4">Cine &
+                        Comunidad
+                    </div>
+                    <h3 class="text-4xl md:text-6xl font-black font-heading text-white mb-8 leading-tight">
+                        Más allá de la mente, <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400">el
+                            Séptimo Arte.</span>
+                    </h3>
+                    <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-10">
+                        En Psicosofia no todo es introspección. Nos reunimos para vivir historias, analizar el
+                        lenguaje
+                        cinematográfico y compartir palomitas en nuestras noches de cine semanales.
+                    </p>
+                    <a href="ocio.html"
+                        class="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all duration-500 hover:scale-105 shadow-2xl">
+                        Ver Cartelera
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
            SECCIÓN: OPINIÓN
            Sistema de reseñas con formulario y visualización de comentarios.
         -->
-            <section id="opinion" class="py-12 container mx-auto px-4 md:px-6 section-reveal">
-                <h2 class="text-4xl font-black mb-10 text-center tracking-widest uppercase opacity-20">Danos tu Opinión
-                </h2>
+        <section id="opinion" class="py-12 container mx-auto px-4 md:px-6 section-reveal">
+            <h2 class="text-4xl font-black mb-10 text-center tracking-widest uppercase opacity-20">Danos tu Opinión
+            </h2>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div class="stats-glass-card p-6 md:p-10 rounded-[40px]">
-                        <h3 class="text-2xl font-bold mb-8 font-heading text-violet-400 text-center lg:text-left">¿Qué
-                            opinas del server?</h3>
-                        <form id="review-form" class="flex flex-col gap-6">
-                            <div>
-                                <input type="text" id="rev-username" placeholder="Tu nombre de usuario" required
-                                    autocomplete="off"
-                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm outline-none focus:border-violet-500 transition-all">
-                            </div>
-                            <div>
-                                <textarea id="rev-comment" placeholder="Tu comentario..." required rows="4"
-                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm outline-none focus:border-violet-500 transition-all resize-none"></textarea>
-                            </div>
-                            <div class="flex flex-col items-center gap-4">
-                                <span
-                                    class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Puntuación</span>
-                                <div class="star-rating">
-                                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-                                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-                                </div>
-                            </div>
-                            <button type="submit"
-                                class="w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-black py-4 rounded-2xl uppercase tracking-widest hover:scale-[1.02] transition-all">
-                                Enviar Opinión
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="flex flex-col gap-6">
-                        <h3
-                            class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2 text-center lg:text-left">
-                            Últimos comentarios
-                        </h3>
-                        <div id="reviews-container"
-                            class="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
-                            <p class="text-gray-500 text-sm italic">Cargando opiniones...</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="stats-glass-card p-6 md:p-10 rounded-[40px]">
+                    <h3 class="text-2xl font-bold mb-8 font-heading text-violet-400 text-center lg:text-left">¿Qué
+                        opinas del server?</h3>
+                    <form id="review-form" class="flex flex-col gap-6">
+                        <div>
+                            <input type="text" id="rev-username" placeholder="Tu nombre de usuario" required
+                                autocomplete="off"
+                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm outline-none focus:border-violet-500 transition-all">
                         </div>
+                        <div>
+                            <textarea id="rev-comment" placeholder="Tu comentario..." required rows="4"
+                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm outline-none focus:border-violet-500 transition-all resize-none"></textarea>
+                        </div>
+                        <div class="flex flex-col items-center gap-4">
+                            <span
+                                class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Puntuación</span>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-black py-4 rounded-2xl uppercase tracking-widest hover:scale-[1.02] transition-all">
+                            Enviar Opinión
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <h3
+                        class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2 text-center lg:text-left">
+                        Últimos comentarios
+                    </h3>
+                    <div id="reviews-container" class="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
+                        <p class="text-gray-500 text-sm italic">Cargando opiniones...</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
     </main>
 
     <div class="terminal-btn" onclick="toggleTerminal()">

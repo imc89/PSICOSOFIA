@@ -291,6 +291,24 @@
             }
         }
 
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(124, 58, 237, 0.4);
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 58, 237, 0.7);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
         /* Permitir scroll libre en contenedores principales */
         .custom-scrollbar,
         section,
@@ -308,7 +326,7 @@
             #particles-js,
             .orb {
                 display: block !important;
-                z-index: -1 !important;
+                z-index: -10 !important;
                 pointer-events: none !important;
             }
 
@@ -325,10 +343,22 @@
                 /* Essential for smooth iOS scroll */
             }
 
-            /* FIX 3: Restore touch gesture detection */
+            /* FIX 3: Restore touch gesture detection & Agile Scroll */
+            html,
             body {
                 -webkit-user-select: text;
                 user-select: text;
+                touch-action: pan-y !important;
+                /* Force agile scroll engagement */
+                overflow-y: auto !important;
+                height: auto !important;
+                position: relative !important;
+            }
+
+            /* FIX 4: Ensure background wrapper is completely invisible to gestures */
+            .fixed.inset-0 {
+                pointer-events: none !important;
+                z-index: -100 !important;
             }
         }
     </style>
