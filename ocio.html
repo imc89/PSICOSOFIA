@@ -73,6 +73,14 @@
             pointer-events: none !important;
         }
 
+        /* 4-Step Fix: Step 1 - Unified interaction handling */
+        input,
+        textarea,
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
         .font-heading {
             font-family: 'Space Grotesk', sans-serif;
         }
@@ -314,52 +322,41 @@
         }
 
         /* ==========================================
-           DEFINITIVE MOBILE SCROLL FIX
-           (Zero Restrictions, Absolute Expansion)
+           SURGICAL MOBILE SCROLL FIX (DEFINITIVE)
            ========================================== */
-        @media (max-width: 1024px) {
+        @media (hover: none) and (pointer: coarse),
+        (max-width: 1024px) {
 
-            /* 1. Force Browser-Native Scroll Engagement */
+            /* Step 2 & 3: Root Stabilization & Kill Nested Scrolls */
             html,
             body {
                 height: auto !important;
-                min-height: 101vh !important;
+                min-height: 100vh !important;
                 overflow-y: auto !important;
+                overflow-x: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
-                touch-action: auto !important;
             }
 
-            /* 2. Kill Nested Scrolls (Expansion Strategy) */
+            /* Killing all nested scroll traps */
+            .max-h-\[480px\],
             .custom-scrollbar,
             .overflow-y-auto {
                 max-height: none !important;
-                height: auto !important;
                 overflow: visible !important;
             }
 
-            /* 3. Background Ghosting (Directly Layered) */
+            /* Step 4: Gesture Transparency (Ghost Layers) */
             .bg-canvas,
             #particles-js,
-            .orb {
-                position: fixed !important;
-                inset: 0 !important;
+            .orb,
+            #cursor-aura {
                 pointer-events: none !important;
                 z-index: -10 !important;
             }
 
-            /* 4. Filter Restoration (with Safe Layout) */
-            nav,
-            .stats-glass-card {
-                backdrop-filter: blur(20px) !important;
-                -webkit-backdrop-filter: blur(20px) !important;
-                background: rgba(10, 10, 10, 0.8) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            }
-
-            /* 5. UI Cleanup */
+            /* UI Cleanup */
             #cursor-aura,
-            #cursor-label,
-            #custom-cursor {
+            #cursor-label {
                 display: none !important;
             }
         }
