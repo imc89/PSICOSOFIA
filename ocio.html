@@ -21,16 +21,20 @@
         }
 
 
-        *,
-        *:hover,
-        a,
-        button,
-        input,
-        select,
-        textarea,
-        body,
-        div {
-            cursor: url('public/img/cursor/cursor.png'), auto;
+        /* Cursor personalizado SOLO en desktop con ratón */
+        @media (hover: hover) and (pointer: fine) {
+
+            *,
+            *:hover,
+            a,
+            button,
+            input,
+            select,
+            textarea,
+            body,
+            div {
+                cursor: url('public/img/cursor/cursor.png'), auto;
+            }
         }
 
 

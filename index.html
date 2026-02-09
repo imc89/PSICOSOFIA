@@ -40,16 +40,20 @@
         }
 
 
-        *,
-        *:hover,
-        a,
-        button,
-        input,
-        select,
-        textarea,
-        body,
-        div {
-            cursor: url('public/img/cursor/cursor.png'), auto;
+        /* Cursor personalizado SOLO en desktop con ratón */
+        @media (hover: hover) and (pointer: fine) {
+
+            *,
+            *:hover,
+            a,
+            button,
+            input,
+            select,
+            textarea,
+            body,
+            div {
+                cursor: url('public/img/cursor/cursor.png'), auto;
+            }
         }
 
 
@@ -173,9 +177,20 @@
             height: 300px;
             background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
             border-radius: 50%;
-            pointer-events: none;
+            pointer-events: none !important;
             z-index: 9998;
             will-change: transform;
+        }
+
+        /* Desactivar cursores, orbes y efectos pesados en dispositivos táctiles */
+        @media (hover: none) or (pointer: coarse) {
+
+            #cursor-aura,
+            #cursor-label,
+            .orb,
+            #particles-js {
+                display: none !important;
+            }
         }
 
         .dynamic-text {
@@ -518,6 +533,13 @@
         /* Permitir scroll libre en contenedores principales */
 
 
+
+        /* Permitir scroll explícito en contenedores */
+        main,
+        section,
+        .stats-glass-card {
+            touch-action: pan-y;
+        }
 
         /* Elementos clickeables - permitir scroll mientras se mantiene click */
         .staff-clickable,
@@ -874,11 +896,13 @@
     <div id="cursor-label"></div>
 
     <!-- Fondo de malla y orbes animados (WRAPPED FOR OVERFLOW PROTECTION) -->
-    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-50">
-        <div class="bg-canvas"></div>
+    <div class="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-50"
+        style="pointer-events: none !important;">
+        <div class="bg-canvas" style="pointer-events: none !important;"></div>
+        <!-- Orbes ocultos en móvil por CSS media query -->
         <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
         <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
-        <div id="particles-js"></div>
+        <div id="particles-js" style="pointer-events: none !important;"></div>
     </div>
 
 
