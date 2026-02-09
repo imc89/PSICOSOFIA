@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="application-name" content="Psicosofia">
-    <title>Psicosofia | Hub de Conocimiento</title>
+    <title>Psicosofia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
@@ -810,12 +810,14 @@
             z-index: 2050;
             opacity: 0;
             pointer-events: none;
+            visibility: hidden;
             transition: 0.4s;
         }
 
         #mobile-drawer-overlay.active {
             opacity: 1;
             pointer-events: auto;
+            visibility: visible;
         }
 
         /* Estilos Opiniones */
@@ -937,10 +939,13 @@
                 display: none !important;
             }
 
-            /* FIX 2: Avoid nested scroll issues */
+            /* FIX 2: Restore internal scroll (User requested) */
             .custom-scrollbar {
-                max-height: none !important;
-                overflow: visible !important;
+                max-height: 480px !important;
+                /* Re-apply max height for mobile scroll */
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+                /* Essential for smooth iOS scroll */
             }
 
             /* FIX 3: Restore touch gesture detection */

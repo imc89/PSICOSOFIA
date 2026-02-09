@@ -316,10 +316,13 @@
                 display: none !important;
             }
 
-            /* FIX 2: Avoid nested scroll issues */
+            /* FIX 2: Restore internal scroll (User requested) */
             .custom-scrollbar {
-                max-height: none !important;
-                overflow: visible !important;
+                max-height: 480px !important;
+                /* Re-apply max height for mobile scroll */
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+                /* Essential for smooth iOS scroll */
             }
 
             /* FIX 3: Restore touch gesture detection */
@@ -462,7 +465,9 @@
                             class="bg-violet-600/20 border border-violet-500/30 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start justify-center">
                             <div class="flex items-center gap-2">
                                 <span class="text-sm">📍</span>
-                                <span class="text-[10px] font-black uppercase tracking-widest">Sala Discord</span>
+                                <span class="text-[10px] font-black uppercase tracking-widest">Sala de Discord: <p>Pelis
+                                        y
+                                        Series</p></span>
                             </div>
                         </div>
                     </div>
