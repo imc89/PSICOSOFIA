@@ -390,18 +390,20 @@
             z-index: 0;
         }
 
-        .stats-glass-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            /* Elevación sutil */
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(124, 58, 237, 0.3);
-            /* Sombra 3D direccionada solo hacia abajo */
-            box-shadow: 0 25px 30px -15px rgba(0, 0, 0, 0.6);
-        }
+        @media (hover: hover) {
+            .stats-glass-card:hover {
+                transform: translateY(-8px) scale(1.01);
+                /* Elevación sutil */
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(124, 58, 237, 0.3);
+                /* Sombra 3D direccionada solo hacia abajo */
+                box-shadow: 0 25px 30px -15px rgba(0, 0, 0, 0.6);
+            }
 
-        .stats-glass-card:hover::after {
-            opacity: 1;
-            /* Muestra el resplandor interno */
+            .stats-glass-card:hover::after {
+                opacity: 1;
+                /* Muestra el resplandor interno */
+            }
         }
 
         .stats-glass-card>* {
@@ -440,11 +442,17 @@
             gap: 1.5rem;
         }
 
-        .dimension-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(124, 58, 237, 0.4);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        @media (hover: hover) {
+            .dimension-card:hover {
+                transform: translateY(-15px) scale(1.02);
+                background: rgba(255, 255, 255, 0.07);
+                border-color: rgba(124, 58, 237, 0.4);
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            }
+
+            .dimension-card:hover img {
+                opacity: 1;
+            }
         }
 
         .dimension-card img {
@@ -456,9 +464,7 @@
             transition: opacity 0.5s ease;
         }
 
-        .dimension-card:hover img {
-            opacity: 1;
-        }
+
 
         .terminal-btn {
             position: fixed;
@@ -481,10 +487,12 @@
             font-size: 14px;
         }
 
-        .terminal-btn:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(124, 58, 237, 0.4);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        @media (hover: hover) {
+            .terminal-btn:hover {
+                transform: scale(1.1) rotate(5deg);
+                background: rgba(124, 58, 237, 0.4);
+                box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+            }
         }
 
         /* ==========================================
@@ -498,17 +506,14 @@
         }
 
         body {
-            -webkit-tap-highlight-color: rgba(124, 58, 237, 0.1);
-            touch-action: manipulation;
-            /* Permite scroll libre y previene double-tap-zoom */
+            -webkit-tap-highlight-color: transparent;
+            /* Eliminado touch-action y overscroll-behavior en body para evitar bloqueos */
         }
 
         /* Permitir scroll libre en contenedores principales */
-        section,
-        main,
-        .stats-glass-card {
-            touch-action: pan-y pan-x;
-        }
+        /* Permitir scroll libre en contenedores principales */
+        /* Permitir scroll libre - Eliminada restricción global */
+
 
         /* Elementos clickeables - permitir scroll mientras se mantiene click */
         .staff-clickable,
@@ -804,9 +809,16 @@
             transition: 0.3s;
         }
 
-        .review-card:hover {
-            border-color: var(--accent);
+        .review-card:active,
+        .review-card:focus {
             background: rgba(255, 255, 255, 0.04);
+        }
+
+        @media (hover: hover) {
+            .review-card:hover {
+                border-color: var(--accent);
+                background: rgba(255, 255, 255, 0.04);
+            }
         }
 
         ::-webkit-scrollbar {
@@ -2126,15 +2138,6 @@
         }
 
         //  FIN LOGICA DE JUEGO
-
-        // Mantener activo el backend en Koyeb
-        function keepAlive() {
-            fetch('https://visual-wilona-psicosofia-65a8dc5f.koyeb.app/')
-                .then(res => console.log('Keep-alive ping sent:', res.status))
-                .catch(err => console.error('Keep-alive ping failed:', err));
-        }
-        setInterval(keepAlive, 2400000); // 40 minutos
-        keepAlive(); // Ejecutar inmediatamente al inicio
 
         /* --- RESTRICTED INTERACTION (SEC) --- */
         document.addEventListener('contextmenu', e => e.preventDefault());
