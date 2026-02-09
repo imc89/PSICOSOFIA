@@ -535,11 +535,11 @@
 
 
 
-        /* Permitir scroll explícito en contenedores */
+        /* Permitir scroll libre en contenedores principales */
         main,
         section,
         .stats-glass-card {
-            touch-action: pan-y;
+            touch-action: auto;
         }
 
         /* Elementos clickeables - permitir scroll mientras se mantiene click */
@@ -628,9 +628,9 @@
                 gap: 1rem !important;
             }
 
-            /* FORCE SCROLL: Asegurar que TODO elemento permita scroll vertical */
+            /* RESTORE NATIVE SCROLL: Eliminar restricciones de touch-action */
             * {
-                touch-action: pan-y !important;
+                touch-action: auto !important;
             }
 
 
@@ -905,8 +905,7 @@
         (pointer: coarse),
         (max-width: 1024px) {
             * {
-                touch-action: pan-y !important;
-                -webkit-user-drag: none;
+                touch-action: auto !important;
                 cursor: auto !important;
                 /* Desactivar cursor pointer en móvil */
             }
@@ -2209,9 +2208,9 @@
 
         //  FIN LOGICA DE JUEGO
 
-        /* --- RESTRICTED INTERACTION (SEC) --- */
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('dragstart', e => e.preventDefault());
+        /* --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) --- */
+        // document.addEventListener('contextmenu', e => e.preventDefault());
+        // document.addEventListener('dragstart', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey || e.metaKey) {
                 if (['c', 'u', 's', 'p'].includes(e.key.toLowerCase())) {

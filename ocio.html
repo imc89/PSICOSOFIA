@@ -32,9 +32,9 @@
                 min-height: 44px !important;
             }
 
-            /* FORCE SCROLL */
+            /* RESTORE NATIVE SCROLL: Eliminar restricciones de touch-action */
             * {
-                touch-action: pan-y !important;
+                touch-action: auto !important;
             }
 
             *,
@@ -55,8 +55,7 @@
         (pointer: coarse),
         (max-width: 1024px) {
             * {
-                touch-action: pan-y !important;
-                -webkit-user-drag: none;
+                touch-action: auto !important;
             }
         }
 
@@ -297,7 +296,7 @@
         section,
         main,
         .stats-glass-card {
-            touch-action: manipulation;
+            touch-action: auto;
             -webkit-overflow-scrolling: touch;
         }
     </style>
@@ -787,9 +786,9 @@
 
         document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
 
-        /* --- RESTRICTED INTERACTION (SEC) --- */
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('dragstart', e => e.preventDefault());
+        /* --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) --- */
+        // document.addEventListener('contextmenu', e => e.preventDefault());
+        // document.addEventListener('dragstart', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey || e.metaKey) {
                 if (['c', 'u', 's', 'p'].includes(e.key.toLowerCase())) {
