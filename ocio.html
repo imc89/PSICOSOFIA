@@ -51,12 +51,14 @@
         }
 
         /* Global touch-action for mobile devices */
-        @media (hover: none) and (pointer: coarse) {
-            body {
-                touch-action: pan-y;
+        @media (hover: none),
+        (pointer: coarse),
+        (max-width: 1024px) {
+            * {
+                touch-action: pan-y !important;
+                -webkit-user-drag: none;
             }
         }
-
 
         body {
             background-color: var(--bg-dark);
