@@ -507,12 +507,16 @@
 
         body {
             -webkit-tap-highlight-color: transparent;
-            /* Eliminado touch-action y overscroll-behavior en body para evitar bloqueos */
+            /* Scroll totalmente nativo y libre */
+        }
+
+        /* Asegurar que las partículas no roben clicks nunca */
+        canvas {
+            pointer-events: none !important;
         }
 
         /* Permitir scroll libre en contenedores principales */
-        /* Permitir scroll libre en contenedores principales */
-        /* Permitir scroll libre - Eliminada restricción global */
+
 
 
         /* Elementos clickeables - permitir scroll mientras se mantiene click */
@@ -591,7 +595,8 @@
             /* Reducir blur para mejor performance */
             .stats-glass-card,
             nav {
-                backdrop-filter: blur(10px) !important;
+                backdrop-filter: blur(4px) !important;
+                -webkit-backdrop-filter: blur(4px) !important;
             }
 
             /* Grid de staff - 1 columna en móvil pequeño */
@@ -965,7 +970,7 @@
        SECCIÓN HERO
        Puerta de entrada con logo animado y estadísticas principales.
     -->
-        <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 md:px-6">
+        <section class="min-h-[100dvh] flex flex-col items-center justify-center text-center px-4 md:px-6">
 
             <div
                 class="image-logo w-32 h-32 md:w-56 md:h-56 rounded-full p-1.5 bg-gradient-to-br from-violet-500 via-white to-cyan-400 shadow-[0_0_120px_rgba(124,58,237,0.5)] mb-[15px] animate-bounce-slow">
@@ -1988,18 +1993,10 @@
         window.addEventListener('scroll', () => {
             if (!scrollTicking) {
                 requestAnimationFrame(() => {
-                    const scrolled = window.scrollY;
                     const viewHeight = window.innerHeight * 0.85;
 
-                    parallaxElements.forEach(el => {
-                        const speed = el.getAttribute('data-parallax') || 0.1;
-                        el.style.transform = `translateY(${scrolled * speed}px)`;
-                    });
-
-                    orbs.forEach((orb, i) => {
-                        const speed = (i + 1) * 0.05;
-                        orb.style.transform = `translateY(${scrolled * speed}px)`;
-                    });
+                    // PARALLAX REMOVED FOR PERFORMANCE
+                    // Only keeping section reveal logic
 
                     sectionReveals.forEach(sec => {
                         if (sec.getBoundingClientRect().top < viewHeight) {
@@ -2087,7 +2084,7 @@
         particleScript.onload = () => {
             particlesJS("particles-js", {
                 particles: {
-                    number: { value: 90 },
+                    number: { value: 40 }, /* Cantidad optimizada para móviles */
                     color: { value: "#7c3aed" },
                     opacity: { value: 0.8 },
                     size: { value: 3, random: true },

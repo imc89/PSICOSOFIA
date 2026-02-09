@@ -45,8 +45,12 @@
             user-select: none;
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            overscroll-behavior-y: none;
+            /* Scroll totalmente nativo y libre */
+        }
+
+        /* Asegurar que las partículas no roben clicks nunca */
+        canvas {
+            pointer-events: none !important;
         }
 
         .font-heading {
