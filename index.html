@@ -810,14 +810,14 @@
             z-index: 2050;
             opacity: 0;
             pointer-events: none;
-            visibility: hidden;
+            display: none;
             transition: 0.4s;
         }
 
         #mobile-drawer-overlay.active {
             opacity: 1;
             pointer-events: auto;
-            visibility: visible;
+            display: block;
         }
 
         /* Estilos Opiniones */
@@ -1253,7 +1253,7 @@
                                     Nombre Staff</h3>
                             </div>
 
-                            <div class="flex items-center gap-4 mb-8 text-xs text-gray-500">
+                            <div class="flex items-center gap-4 mb-8 text-xs text-gray-300">
                                 <div class="flex items-center gap-2">
                                     <span>📅</span>
                                     <span id="staff-detail-date">Desde ...</span>
@@ -2015,7 +2015,7 @@
                             <span class="text-[9px] uppercase tracking-widest font-bold ${data.role.includes('Owner') ? 'text-violet-400' : (data.role.includes('Admin') ? 'text-cyan-400' : (data.role.includes('Mod') ? 'text-green-400' : (data.role.includes('Apoyo') ? 'text-amber-400' : (data.role.includes('Diseño') ? 'text-pink-400' : 'text-blue-400'))))}">${data.role}</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-500">
+                    <div class="flex items-center gap-2 mb-2 text-[9px] text-gray-300">
                         <span>📅</span>
                         <span>Desde ${data.date}</span>
                     </div>
