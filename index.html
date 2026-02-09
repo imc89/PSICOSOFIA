@@ -632,23 +632,12 @@
                 touch-action: pan-y !important;
             }
 
-            /* ==========================================
-           FIX UNIVERSAL DE SCROLL (CRÍTICO)
-           Aplica a cualquier dispositivo táctil o tablet/móvil
-           ========================================== */
-        }
 
-        @media (hover: none),
-        (pointer: coarse),
-        (max-width: 1024px) {
-            * {
-                touch-action: pan-y !important;
-                -webkit-user-drag: none;
+            /* Navbar - Ajustar spacing */
+            nav {
+                padding: 0.75rem 1rem !important;
             }
-        }
 
-        /* Navbar - Ajustar spacing */
-        nav {
             padding: 0.75rem 1rem !important;
         }
 
@@ -901,6 +890,30 @@
             opacity: 1;
             pointer-events: auto;
             transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ==========================================
+           FIX UNIVERSAL DE SCROLL (CRÍTICO) - COLOCADO AL FINAL
+           ========================================== */
+        @media (hover: none),
+        (pointer: coarse),
+        (max-width: 1024px) {
+            * {
+                touch-action: pan-y !important;
+                -webkit-user-drag: none;
+                cursor: auto !important;
+                /* Desactivar cursor pointer en móvil */
+            }
+
+            /* Desactivar hovers en móvil */
+            .stats-glass-card:hover,
+            .dimension-card:hover,
+            .pillar-card:hover,
+            .terminal-btn:hover {
+                transform: none !important;
+                box-shadow: none !important;
+                background: rgba(255, 255, 255, 0.03) !important;
+            }
         }
     </style>
 </head>
