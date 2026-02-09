@@ -966,11 +966,12 @@
             body {
                 -webkit-user-select: text;
                 user-select: text;
-                touch-action: pan-y !important;
-                /* Force agile scroll engagement */
+                touch-action: auto !important;
                 overflow-y: auto !important;
                 height: auto !important;
+                min-height: 100% !important;
                 position: relative !important;
+                -webkit-overflow-scrolling: touch !important;
             }
 
             /* FIX 4: Ensure background wrapper is completely invisible to gestures */
