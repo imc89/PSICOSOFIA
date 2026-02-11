@@ -1252,10 +1252,13 @@
         const particleScript = document.createElement('script');
         particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
         particleScript.onload = () => {
+            // Detectamos si es un dispositivo móvil por el ancho de pantalla
+            const isMobile = window.innerWidth < 768;
+
             particlesJS("particles-js", {
                 "particles": {
                     "number": {
-                        "value": 80,
+                        "value": isMobile ? 40 : 80, // Menos partículas en móvil para mejor rendimiento
                         "density": { "enable": true, "value_area": 800 }
                     },
                     "color": { "value": "#7c3aed" },
@@ -1285,8 +1288,9 @@
                 "interactivity": {
                     "detect_on": "canvas",
                     "events": {
-                        "onhover": { "enable": true, "mode": "grab" },
-                        "onclick": { "enable": true, "mode": "push" }
+                        // DESACTIVAMOS en móvil para que no interfiera con el scroll
+                        "onhover": { "enable": !isMobile, "mode": "grab" },
+                        "onclick": { "enable": !isMobile, "mode": "push" }
                     },
                     "modes": {
                         "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } }

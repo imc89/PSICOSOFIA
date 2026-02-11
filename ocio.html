@@ -191,66 +191,52 @@
         const particleScript = document.createElement('script');
         particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
         particleScript.onload = () => {
-            if (window.particlesJS) {
-                particlesJS("particles-js", {
-                    "particles": {
-                        // Aumentamos el número y añadimos densidad para que se adapte al tamaño de pantalla
-                        "number": {
-                            "value": 80,
-                            "density": { "enable": true, "value_area": 800 }
-                        },
-                        "color": { "value": "#7c3aed" },
-                        "shape": { "type": "circle" },
-                        // Opacidad variada para dar profundidad
-                        "opacity": {
-                            "value": 0.5,
-                            "random": true,
-                            "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
-                        },
-                        "size": {
-                            "value": 3,
-                            "random": true,
-                            "anim": { "enable": false }
-                        },
-                        // Líneas de conexión más nítidas
-                        "line_linked": {
-                            "enable": true,
-                            "distance": 150,
-                            "color": "#7c3aed",
-                            "opacity": 0.4, // Brillo similar al index
-                            "width": 1
-                        },
-                        "move": {
-                            "enable": true,
-                            "speed": 2, // Velocidad equilibrada
-                            "direction": "none",
-                            "random": false,
-                            "straight": false,
-                            "out_mode": "out",
-                            "bounce": false
-                        }
+            // Detectamos si es un dispositivo móvil por el ancho de pantalla
+            const isMobile = window.innerWidth < 768;
+
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": isMobile ? 40 : 80, // Menos partículas en móvil para mejor rendimiento
+                        "density": { "enable": true, "value_area": 800 }
                     },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "grab" // Crea ese efecto de red cuando pasas el mouse
-                            },
-                            "onclick": { "enable": true, "mode": "push" },
-                            "resize": true
-                        },
-                        "modes": {
-                            "grab": {
-                                "distance": 140,
-                                "line_linked": { "opacity": 1 } // Al tocar la red, las líneas brillan al máximo
-                            }
-                        }
+                    "color": { "value": "#7c3aed" },
+                    "shape": { "type": "circle" },
+                    "opacity": {
+                        "value": 0.6,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 }
                     },
-                    // CRÍTICO PARA LA NITIDEZ: Activa el soporte para pantallas de alta resolución
-                    "retina_detect": true
-                });
-            }
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#7c3aed",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        // DESACTIVAMOS en móvil para que no interfiera con el scroll
+                        "onhover": { "enable": !isMobile, "mode": "grab" },
+                        "onclick": { "enable": !isMobile, "mode": "push" }
+                    },
+                    "modes": {
+                        "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } }
+                    }
+                },
+                "retina_detect": true
+            });
         };
         document.body.appendChild(particleScript);
 
