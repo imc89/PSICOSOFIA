@@ -7,12 +7,19 @@
 
     #cursor-aura,
     #cursor-label,
-    #custom-cursor,
-    .orb,
-    #particles-js {
+    #custom-cursor {
         display: none !important;
         pointer-events: none !important;
         visibility: hidden !important;
+    }
+
+    /* Fondo animado visible en móvil, pero asegurando transparencia de gestos */
+    .bg-canvas,
+    .orb,
+    #particles-js {
+        pointer-events: none !important;
+        z-index: -10 !important;
+        display: block !important;
     }
 }
 
@@ -37,7 +44,6 @@
     }
 
     /* Desactivar animaciones costosas para mejorar fluidez */
-    .orb,
     .parallax-element {
         animation: none !important;
         transform: none !important;
