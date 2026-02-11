@@ -1247,21 +1247,56 @@
         fetchStaffData();
         setInterval(connectAndFetch, 300000);
 
+
+        // --- PARTICLES.JS (Configuración de Ocio optimizada para Index) ---
         const particleScript = document.createElement('script');
         particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
         particleScript.onload = () => {
             particlesJS("particles-js", {
-                particles: {
-                    number: { value: 40 }, /* Cantidad optimizada para móviles */
-                    color: { value: "#7c3aed" },
-                    opacity: { value: 0.8 },
-                    size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: "#7c3aed", opacity: 0.5, width: 1.5 },
-                    move: { enable: true, speed: 2 }
-                }
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": { "enable": true, "value_area": 800 }
+                    },
+                    "color": { "value": "#7c3aed" },
+                    "shape": { "type": "circle" },
+                    "opacity": {
+                        "value": 0.6,
+                        "random": true,
+                        "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#7c3aed",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": true, "mode": "push" }
+                    },
+                    "modes": {
+                        "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } }
+                    }
+                },
+                "retina_detect": true
             });
         };
         document.body.appendChild(particleScript);
+
 
         //  INICIO LOGICA DE JUEGO
         function initSnake() {
