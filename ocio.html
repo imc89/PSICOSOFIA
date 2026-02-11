@@ -10,25 +10,19 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="public/img/favicon/favicon.ico">
-    <!-- Estilos Externos -->
     <link rel="stylesheet" href="public/css/desktop.css">
     <link rel="stylesheet" href="public/css/responsive.css">
 </head>
 
 <body>
-    <!-- Fondo de malla y orbes animados -->
     <div class="bg-canvas"></div>
     <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
     <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
     <div id="particles-js"></div>
 
-    <!-- CURSOR PERSONALIZADO -->
-    <!-- CURSOR PERSONALIZADO (Effects only) -->
-    <!-- <div id="custom-cursor"></div> REMOVED -->
     <div id="cursor-aura"></div>
     <div id="cursor-label"></div>
 
-    <!-- NAVBAR -->
     <nav
         class="fixed w-full z-50 px-8 py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5">
         <a href="index.html" class="flex items-center gap-4 group" data-label="Volver">
@@ -45,8 +39,7 @@
         </a>
     </nav>
 
-    <main class="pt-32 pb-20 container mx-auto px-6">
-        <!-- HERO OCIO -->
+    <main class="pt-32 pb-20 container mx-auto px-6 relative z-10">
         <header class="text-center mb-20 section-reveal">
             <h1 class="text-5xl md:text-8xl font-black font-heading mb-6 tracking-tighter">
                 MOMENTOS DE <span
@@ -58,7 +51,6 @@
             </p>
         </header>
 
-        <!-- PRÓXIMA FUNCIÓN -->
         <section class="mb-32 section-reveal">
             <div class="stats-glass-card rounded-[50px] p-8 md:p-16 flex flex-col lg:flex-row gap-12 items-center">
                 <div class="w-full lg:w-1/3 aspect-[2/3] rounded-3xl overflow-hidden shadow-2xl relative group">
@@ -79,10 +71,8 @@
                         Conectando con el archivo fílmico de Psicosofia...
                     </p>
                     <div id="movie-genres" class="flex flex-wrap gap-2 mb-8">
-                        <!-- Los géneros se inyectarán aquí -->
                     </div>
                     <div id="timezone-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-                        <!-- España -->
                         <div
                             class="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start group hover:border-violet-500/50 transition-colors">
                             <span
@@ -93,7 +83,6 @@
                                 <span id="movie-hour" class="text-xs font-black uppercase tracking-widest">--:--</span>
                             </div>
                         </div>
-                        <!-- Argentina -->
                         <div
                             class="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start group hover:border-cyan-500/50 transition-colors">
                             <span
@@ -105,7 +94,6 @@
                                     class="text-xs font-black uppercase tracking-widest">--:--</span>
                             </div>
                         </div>
-                        <!-- Venezuela -->
                         <div
                             class="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start group hover:border-violet-500/50 transition-colors">
                             <span
@@ -117,7 +105,6 @@
                                     class="text-xs font-black uppercase tracking-widest">--:--</span>
                             </div>
                         </div>
-                        <!-- Colombia -->
                         <div
                             class="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start group hover:border-cyan-500/50 transition-colors">
                             <span
@@ -129,7 +116,6 @@
                                     class="text-xs font-black uppercase tracking-widest">--:--</span>
                             </div>
                         </div>
-                        <!-- México -->
                         <div
                             class="bg-white/5 border border-white/10 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start group hover:border-violet-500/50 transition-colors">
                             <span
@@ -141,7 +127,6 @@
                                     class="text-xs font-black uppercase tracking-widest">--:--</span>
                             </div>
                         </div>
-                        <!-- Sala -->
                         <div
                             class="bg-violet-600/20 border border-violet-500/30 p-4 rounded-2xl flex flex-col gap-1 items-center lg:items-start justify-center">
                             <div class="flex items-center gap-2">
@@ -156,7 +141,6 @@
             </div>
         </section>
 
-        <!-- CARTELERA HISTÓRICA -->
         <section class="section-reveal mb-20">
             <div class="flex justify-between items-end mb-12">
                 <div>
@@ -169,13 +153,11 @@
                 <div id="movies-grid-container" class="max-h-[600px] overflow-y-auto custom-scrollbar">
                     <div id="movies-grid"
                         class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-10 p-2 sm:p-10">
-                        <!-- Cards injectadas por JS -->
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SERIES SECTION -->
         <section class="section-reveal">
             <div class="flex justify-between items-end mb-12">
                 <div>
@@ -188,7 +170,6 @@
                 <div id="series-grid-container" class="max-h-[600px] overflow-y-auto custom-scrollbar">
                     <div id="series-grid"
                         class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-10 p-2 sm:p-10">
-                        <!-- Cards injectadas por JS -->
                     </div>
                 </div>
             </div>
@@ -196,48 +177,104 @@
     </main>
 
     <footer
-        class="py-12 border-t border-white/5 container mx-auto px-6 text-center text-gray-500 text-[10px] font-bold uppercase tracking-[0.5em]">
+        class="py-12 border-t border-white/5 container mx-auto px-6 text-center text-gray-500 text-[10px] font-bold uppercase tracking-[0.5em] relative z-10">
         © 2026 Psicosofia. Todos los derechos reservados.
     </footer>
 
-    <!-- SCRIPTS MÍNIMOS PARA CONSISTENCIA -->
-    <!-- SCRIPTS DE INTERACCIÓN PREMIUM -->
     <script>
         const API_URL = '';
-        /* const cursor removed */
         const aura = document.getElementById('cursor-aura');
         const label = document.getElementById('cursor-label');
+
+        // --- SISTEMA DE PARTÍCULAS (Configuración) ---
+        // Se carga primero para asegurar la inicialización visual
+        const particleScript = document.createElement('script');
+        particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
+        particleScript.onload = () => {
+            if (window.particlesJS) {
+                particlesJS("particles-js", {
+                    "particles": {
+                        // Aumentamos el número y añadimos densidad para que se adapte al tamaño de pantalla
+                        "number": {
+                            "value": 80,
+                            "density": { "enable": true, "value_area": 800 }
+                        },
+                        "color": { "value": "#7c3aed" },
+                        "shape": { "type": "circle" },
+                        // Opacidad variada para dar profundidad
+                        "opacity": {
+                            "value": 0.5,
+                            "random": true,
+                            "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": { "enable": false }
+                        },
+                        // Líneas de conexión más nítidas
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#7c3aed",
+                            "opacity": 0.4, // Brillo similar al index
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2, // Velocidad equilibrada
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab" // Crea ese efecto de red cuando pasas el mouse
+                            },
+                            "onclick": { "enable": true, "mode": "push" },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": { "opacity": 1 } // Al tocar la red, las líneas brillan al máximo
+                            }
+                        }
+                    },
+                    // CRÍTICO PARA LA NITIDEZ: Activa el soporte para pantallas de alta resolución
+                    "retina_detect": true
+                });
+            }
+        };
+        document.body.appendChild(particleScript);
 
         // --- DYNAMIC MOVIE DATA ---
         function convertTime(timeStr, offsetHours) {
             if (!timeStr || !timeStr.includes(':')) return "--:--";
             const [hours, minutes] = timeStr.split(':').map(Number);
             let totalMinutes = hours * 60 + minutes + (offsetHours * 60);
-
-            // Ajustar para overflow/underflow (24h clock)
             while (totalMinutes < 0) totalMinutes += 1440;
             while (totalMinutes >= 1440) totalMinutes -= 1440;
-
             const h = Math.floor(totalMinutes / 60);
             const m = totalMinutes % 60;
             return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
         }
 
         async function fetchFeaturedFilm() {
-
             try {
                 const response = await fetch(`${API_URL}/api/psicofilms`);
                 if (!response.ok) throw new Error('Error fetching featured film');
                 const films = await response.json();
-
-                if (!films || films.length === 0) {
-                    setupFeaturedFilm(fallbackFeatured);
-                    return;
-                }
+                if (!films || films.length === 0) { setupFeaturedFilm(fallbackFeatured); return; }
+                setupFeaturedFilm(films[films.length - 1]);
 
                 const latestFilm = films[films.length - 1];
-                setupFeaturedFilm(latestFilm);
-
                 const genreContainer = document.getElementById('movie-genres');
                 if (genreContainer && latestFilm.genero) {
                     genreContainer.innerHTML = '';
@@ -249,33 +286,39 @@
                     });
                 }
             } catch (error) {
-                console.error('Featured film fetch failed:', error);
-                setupFeaturedFilm(fallbackFeatured);
+                setupFeaturedFilm(null);
             }
         }
 
         async function fetchHistoricalBillboard() {
             try {
                 const response = await fetch('public/data/historical_films.json');
-                if (!response.ok) throw new Error('Error al cargar historical_films.json');
+                if (!response.ok) throw new Error('Error');
                 const films = await response.json();
                 renderGrid(films, 'movies-grid');
             } catch (error) {
-                console.error('Historical billboard fetch failed:', error);
                 const fallbackHistorical = [
-                    { film: "Descifrando Enigma", date: " 05/04/25", poster: "https://media.themoviedb.org/t/p/w440_and_h660_face/7PZSbbZbCfiXDNB6HMLY66xHTPK.jpg" }
+                    { film: "Descifrando Enigma", date: "05/04/25", poster: "https://media.themoviedb.org/t/p/w440_and_h660_face/7PZSbbZbCfiXDNB6HMLY66xHTPK.jpg" }
                 ];
                 renderGrid(fallbackHistorical, 'movies-grid');
             }
         }
 
         function setupFeaturedFilm(filmData) {
-            if (!filmData) return;
-            if (document.getElementById('movie-title')) document.getElementById('movie-title').innerText = filmData.film || "Sin título";
-            if (document.getElementById('movie-description')) document.getElementById('movie-description').innerText = filmData.description || "Simulación de realidad. Un clásico cyberpunk que define nuestra era.";
-            if (document.getElementById('movie-date')) document.getElementById('movie-date').innerText = filmData.date || "Próximamente";
+            // Fallback por defecto si no hay datos
+            const data = filmData || {
+                film: "Blade Runner 2049",
+                description: "Treinta años después de los eventos del primer film, un nuevo blade runner desentierra un secreto...",
+                date: "Próximamente",
+                hour: "22:00",
+                poster: "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+            };
 
-            const baseTime = filmData.hour || "22:00";
+            if (document.getElementById('movie-title')) document.getElementById('movie-title').innerText = data.film;
+            if (document.getElementById('movie-description')) document.getElementById('movie-description').innerText = data.description;
+            if (document.getElementById('movie-date')) document.getElementById('movie-date').innerText = data.date;
+
+            const baseTime = data.hour;
             if (document.getElementById('movie-hour')) document.getElementById('movie-hour').innerText = baseTime;
             const hourOffsets = { 'movie-hour-arg': -4, 'movie-hour-ven': -5, 'movie-hour-col': -6, 'movie-hour-mex': -7 };
             for (const [id, offset] of Object.entries(hourOffsets)) {
@@ -284,8 +327,8 @@
             }
 
             const posterImg = document.getElementById('movie-poster');
-            if (posterImg && filmData.poster) {
-                posterImg.src = filmData.poster.startsWith('http') ? filmData.poster : (filmData.poster.startsWith('data:') ? filmData.poster : `data:image/jpeg;base64,${filmData.poster}`);
+            if (posterImg && data.poster) {
+                posterImg.src = data.poster.startsWith('http') ? data.poster : (data.poster.startsWith('data:') ? data.poster : `data:image/jpeg;base64,${data.poster}`);
                 posterImg.onload = () => posterImg.classList.remove('opacity-0');
             }
         }
@@ -293,11 +336,10 @@
         async function fetchSeriesData() {
             try {
                 const response = await fetch('public/data/historical_series.json');
-                if (!response.ok) throw new Error('Error al cargar historical_series.json');
+                if (!response.ok) throw new Error('Error');
                 const series = await response.json();
                 renderGrid(series, 'series-grid');
             } catch (error) {
-                console.error('Series data fetch failed:', error);
                 const fallbackSeries = [
                     { serie: "Death Note", date: "05-02-2025", poster: "https://image.tmdb.org/t/p/original/bCKIMUHwRTRPbh6o7T3Ud50suWT.jpg" }
                 ];
@@ -309,211 +351,52 @@
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = '';
-
-            const list = [...items];
-
-            list.forEach(item => {
+            items.forEach(item => {
                 const card = document.createElement('div');
-                // Rediseño: Vertical, compacto, máximo aprovechamiento de carátula
                 card.className = "flex flex-col items-center gap-2 p-2 bg-white/5 border border-white/10 rounded-2xl transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-4 hover:shadow-[0_45px_100px_-20px_rgba(124,58,237,0.7),0_0_30px_0_rgba(139,92,246,0.3)] hover:bg-white/15 group h-full w-full max-w-[190px] mx-auto transform-gpu";
-
-                const imgSrc = item.poster ? (item.poster.startsWith('http') ? item.poster : (item.poster.startsWith('data:') ? item.poster : `data:image/jpeg;base64,${item.poster}`)) : 'https://via.placeholder.com/300x450/000000/ffffff?text=No+Cover';
-                const date = item.date || "05-02-2025";
-                const title = item.film || item.serie || "Sin título";
-
+                const imgSrc = item.poster ? (item.poster.startsWith('http') ? item.poster : `data:image/jpeg;base64,${item.poster}`) : 'https://via.placeholder.com/300x450';
                 card.innerHTML = `
-                    <!-- Título (Optimizado para 3 columnas) -->
-                    <h3 class="font-black text-[10px] sm:text-[11px] text-center text-white/90 uppercase tracking-tight sm:tracking-wider leading-tight w-full h-8 flex items-center justify-center line-clamp-2 group-hover:text-cyan-400 transition-colors px-0.5">
-                        ${title}
-                    </h3>
-                    
-                    <!-- Cover (Más pequeño en reposo, crece en hover) -->
+                    <h3 class="font-black text-[10px] sm:text-[11px] text-center text-white/90 uppercase tracking-tight sm:tracking-wider leading-tight w-full h-8 flex items-center justify-center line-clamp-2 group-hover:text-cyan-400 transition-colors px-0.5">${item.film || item.serie || "Sin título"}</h3>
                     <div class="w-[90%] aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-white/5 shrink-0 transition-transform duration-700 group-hover:scale-110">
                         <img src="${imgSrc}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy">
                     </div>
-
-                    <!-- Fecha (Minimalista) -->
                     <div class="mt-auto pb-1">
-                        <span class="text-[9px] font-black text-violet-300/80 uppercase tracking-tighter bg-white/5 px-3 py-0.5 rounded-full border border-white/5 group-hover:border-violet-500/50 group-hover:text-violet-200 transition-all">
-                            ${date}
-                        </span>
+                        <span class="text-[9px] font-black text-violet-300/80 uppercase tracking-tighter bg-white/5 px-3 py-0.5 rounded-full border border-white/5 group-hover:border-violet-500/50 group-hover:text-violet-200 transition-all">${item.date || "N/A"}</span>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // Llamadas independientes para robustez
         fetchFeaturedFilm();
         fetchHistoricalBillboard();
         fetchSeriesData();
 
-        // --- SISTEMA DE PARTÍCULAS ---
-        const particleScript = document.createElement('script');
-        particleScript.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
-        particleScript.onload = () => {
-            if (window.particlesJS) {
-                particlesJS("particles-js", {
-                    particles: {
-                        number: { value: 15 }, // Very low count
-                        color: { value: "#7c3aed" },
-                        opacity: { value: 0.3 },
-                        size: { value: 2, random: true },
-                        line_linked: { enable: false }, // Disable lines for perf
-                        move: { enable: true, speed: 0.5 } // Slow movement
-                    }
-                });
-            }
-        };
-        document.body.appendChild(particleScript);
+        // --- CURSOR EFFECTS (Simplificado para rendimiento) ---
+        let mouseX = 0, mouseY = 0, auraX = 0, auraY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; }, { passive: true });
 
-        // Estado
-        let isOverLink = false;
-        let mouseX = 0, mouseY = 0;
-        let auraX = 0, auraY = 0;
-        let labelX = 0, labelY = 0;
-        let lastTime = performance.now();
-        let letterTimer = 0;
-
-        // Velocidades para aura/label
-        const AURA_LERP = 0.08;
-        const LABEL_LERP = 0.15;
-        const FRAME_TIME = 16.67;
-
-        // Lerp con delta time
-        function lerp(start, end, factor, dt) {
-            const f = 1 - Math.pow(1 - factor, dt / FRAME_TIME);
-            return start + (end - start) * f;
-        }
-
-        // CURSOR INSTANTÁNEO (Logic removed for ball)
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            // cursor.style... REMOVED
-
-            const hoverTarget = e.target.closest('a, button, .movie-card');
-            isOverLink = !!hoverTarget;
-
-            // cursor.classList... REMOVED
-        }, { passive: true });
-
-        // Animation loop
-        function animateEffects(currentTime) {
-            const dt = Math.min(currentTime - lastTime, 50);
-            lastTime = currentTime;
-
-            // Aura
-            auraX = lerp(auraX, mouseX, AURA_LERP, dt);
-            auraY = lerp(auraY, mouseY, AURA_LERP, dt);
-            if (aura) {
-                aura.style.transform = `translate3d(${auraX - 150}px, ${auraY - 150}px, 0)`;
-            }
-
-            // Label
-            labelX = lerp(labelX, mouseX, LABEL_LERP, dt);
-            labelY = lerp(labelY, mouseY, LABEL_LERP, dt);
-            if (label) {
-                label.style.left = labelX + 'px';
-                label.style.top = labelY + 'px';
-            }
-
-            // Partículas
-            if (isOverLink) {
-                letterTimer++;
-                if (letterTimer % 8 === 0) {
-                    createLetter(mouseX, mouseY, false);
+        function animateEffects() {
+            if (window.innerWidth > 1024) {
+                auraX += (mouseX - auraX) * 0.08;
+                auraY += (mouseY - auraY) * 0.08;
+                if (aura) aura.style.transform = `translate3d(${auraX - 150}px, ${auraY - 150}px, 0)`;
+                if (label) {
+                    label.style.left = (mouseX + 15) + 'px';
+                    label.style.top = (mouseY + 15) + 'px';
                 }
             }
-
             requestAnimationFrame(animateEffects);
         }
-        requestAnimationFrame(animateEffects);
+        animateEffects();
 
-        document.addEventListener('mousedown', (e) => {
-            const isClickable = e.target.closest('a, button, .movie-card');
-            if (isClickable) {
-                isOverLink = false;
-                document.querySelectorAll('.letter-particle').forEach(p => p.remove());
-
-                const flash = document.createElement('div');
-                flash.className = 'click-flash';
-                flash.style.left = e.clientX + 'px';
-                flash.style.top = e.clientY + 'px';
-                document.body.appendChild(flash);
-                setTimeout(() => flash.remove(), 400);
-
-                const ring = document.createElement('div');
-                ring.className = 'click-ring';
-                ring.style.left = e.clientX + 'px';
-                ring.style.top = e.clientY + 'px';
-                document.body.appendChild(ring);
-                setTimeout(() => ring.remove(), 700);
-            }
-        });
-
-        const characters = "ΣΨΩΔΦΞΠΓΛΘϘϞϟϠϢϣϤϥϦϧϨϩϪϫϬϭϮϯ";
-        function createLetter(x, y, isExplosion) {
-            const span = document.createElement('span');
-            span.className = 'letter-particle';
-            span.innerText = characters[Math.floor(Math.random() * characters.length)];
-            const colors = ['#fff', '#a78bfa', '#00d4ff', '#7c3aed'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const offsetX = (Math.random() - 0.5) * 60;
-            const offsetY = (Math.random() - 0.5) * 60;
-            let targetX, targetY, duration, size;
-
-            if (isExplosion) {
-                const angle = Math.random() * Math.PI * 2;
-                const dist = Math.random() * 700 + 500;
-                targetX = Math.cos(angle) * dist;
-                targetY = Math.sin(angle) * dist;
-                duration = Math.random() * 1.0 + 1.0;
-                size = Math.random() * 8 + 8;
-            } else {
-                targetX = (Math.random() - 0.5) * 100;
-                targetY = -(Math.random() * 100 + 50);
-                duration = Math.random() * 0.8 + 0.5;
-                size = Math.random() * 5 + 8;
-            }
-
-            span.style.left = (x + offsetX) + 'px';
-            span.style.top = (y + offsetY) + 'px';
-            span.style.setProperty('--color', color);
-            span.style.setProperty('--size', size + 'px');
-            span.style.setProperty('--duration', duration + 's');
-            span.style.setProperty('--x', targetX + 'px');
-            span.style.setProperty('--y', targetY + 'px');
-            span.style.setProperty('--rotate', (Math.random() * 360 - 180) + 'deg');
-            document.body.appendChild(span);
-            setTimeout(() => span.remove(), duration * 1000);
-        }
-
-        // Section Reveal
+        // Reveal animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
-
-        /* --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) --- */
-        // document.addEventListener('contextmenu', e => e.preventDefault());
-        // document.addEventListener('dragstart', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey || e.metaKey) {
-                if (['c', 'u', 's', 'p'].includes(e.key.toLowerCase())) {
-                    e.preventDefault();
-                }
-            }
-            if (['F12'].includes(e.key)) {
-                e.preventDefault();
-            }
-        });
     </script>
 </body>
 
