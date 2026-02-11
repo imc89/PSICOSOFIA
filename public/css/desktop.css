@@ -32,6 +32,10 @@ html {
     font-family: 'Space Grotesk', sans-serif;
 }
 
+.image-logo {
+    margin-top: 150px;
+}
+
 /* Background & Effects */
 .bg-canvas {
     position: fixed;
@@ -548,4 +552,38 @@ a,
 
 .star-rating input {
     display: none;
+}
+
+/* Discord Widget Modal */
+#discord-widget-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 30px rgba(124, 58, 237, 0.3);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+#discord-widget-modal.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Terminal Input Styling */
+#terminal-input {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    color: inherit;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
 }
