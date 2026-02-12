@@ -225,3 +225,21 @@
         pointer-events: none !important;
     }
 }
+
+/* ==========================================
+   6. OPINION SECTION MOBILE CENTERING
+   ========================================== */
+@media (max-width: 768px) {
+    #opinion .stats-glass-card {
+        text-align: center !important;
+    }
+
+    #opinion input,
+    #opinion textarea {
+        text-align: center !important;
+    }
+
+    #opinion ::placeholder {
+        text-align: center !important;
+    }
+}
