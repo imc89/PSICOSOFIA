@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimum-scale=1.0">
     <meta name="application-name" content="Psicosofia">
     <title>Psicosofia</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1361,17 +1362,54 @@
 
         //  FIN LOGICA DE JUEGO
 
+        /* --- STOC ZOOM PREVENTION --- */
+        // Prevent default touch behavior for multi-finger gestures (pinch-zoom)
+        document.addEventListener('touchmove', function (event) {
+            if (event.scale !== 1 || event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent iOS specific gesture zoom
+        document.addEventListener('gesturestart', function (event) {
+            event.preventDefault();
+        });
+        document.addEventListener('gesturechange', function (event) {
+            event.preventDefault();
+        });
+        document.addEventListener('gestureend', function (event) {
+            event.preventDefault();
+        });
+
+        // Prevent double-tap to zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent typical keyboard zoom shortcuts
+        document.addEventListener('keydown', function (event) {
+            if ((event.ctrlKey || event.metaKey) &&
+                (event.key === '=' || event.key === '+' || event.key === '-')) {
+                event.preventDefault();
+            }
+        });
+
         /* --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) --- */
         // document.addEventListener('contextmenu', e => e.preventDefault());
         // document.addEventListener('dragstart', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey || e.metaKey) {
                 if (['c', 'u', 's', 'p'].includes(e.key.toLowerCase())) {
-                    e.preventDefault();
+                    // e.preventDefault(); // Comentado para permitir user experience standard si se desea
                 }
             }
             if (['F12'].includes(e.key)) {
-                e.preventDefault();
+                // e.preventDefault();
             }
         });
     </script>

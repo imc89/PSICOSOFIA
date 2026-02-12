@@ -2,6 +2,11 @@
    1. OPTIMIZACIONES GLOBALES (TOUCH & DESKTOP)
    ========================================== */
 
+html,
+body {
+    touch-action: pan-x pan-y !important;
+}
+
 /* Desactivar elementos visuales pesados o de cursor en dispositivos táctiles */
 @media (hover: none) or (pointer: coarse) {
 
