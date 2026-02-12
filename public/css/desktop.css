@@ -7,6 +7,10 @@
 }
 
 /* Base Styles */
+* {
+    cursor: url('/public/img/cursor/cursor.png'), auto !important;
+}
+
 body {
     background-color: var(--bg-dark);
     color: #fff;
@@ -26,6 +30,11 @@ html {
     scroll-padding-top: 100px;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+}
+
+.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
 }
 
 .font-heading {

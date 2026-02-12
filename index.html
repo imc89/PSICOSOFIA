@@ -1191,8 +1191,17 @@
             const overlay = document.getElementById('mobile-drawer-overlay');
             drawer.classList.toggle('active');
             overlay.classList.toggle('active');
-            document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+            document.body.classList.toggle('no-scroll');
         }
+
+        // Safety: Clean up scroll locking on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                document.body.classList.remove('no-scroll');
+                document.getElementById('mobile-drawer').classList.remove('active');
+                document.getElementById('mobile-drawer-overlay').classList.remove('active');
+            }
+        });
 
         /* Auto-cerrar menú móvil al hacer click en un enlace */
         document.querySelectorAll('#mobile-drawer a').forEach(link => {

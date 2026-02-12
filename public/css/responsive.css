@@ -183,22 +183,16 @@
 
     /* Forzar que el scroll sea manejado por el cuerpo principal */
     html {
-        overflow-x: hidden !important;
-        height: -webkit-fill-available;
-        /* Fix para altura en iOS */
+        height: auto;
+        min-height: 100%;
     }
 
     body {
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        /* Permite el scroll vertical */
-        height: auto !important;
-        min-height: 100vh !important;
-        touch-action: manipulation !important;
-        /* Permite scroll y zoom manual, bloquea gestos dobles */
-        -webkit-overflow-scrolling: touch !important;
-        /* Scroll suave en iOS */
-        position: relative !important;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+        height: auto;
+        touch-action: auto;
     }
 
     /* FIX 2 & 3: Permitir scroll en staff pero mantener reviews expandido */
