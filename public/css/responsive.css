@@ -5,6 +5,11 @@
 html,
 body {
     touch-action: pan-x pan-y !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative;
+    /* Ensure it respects layout boundaries */
 }
 
 /* Desactivar elementos visuales pesados o de cursor en dispositivos táctiles */
@@ -25,6 +30,15 @@ body {
         pointer-events: none !important;
         z-index: -10 !important;
         display: block !important;
+        max-width: 100vw !important;
+        /* Safety constraint */
+    }
+}
+
+/* Global mobile constraint */
+@media (max-width: 1024px) {
+    * {
+        max-width: 100vw;
     }
 }
 
