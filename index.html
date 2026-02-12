@@ -286,17 +286,18 @@
                VISTA DETALLADA
                Se activa al hacer click en una tarjeta de staff (expandStaff()).
             -->
-                <div id="staff-detail-view" class="hidden opacity-0 scale-95 transition-all duration-700 w-full h-full">
-                    <!-- Botón de Volver -->
+                <div id="staff-detail-view"
+                    class="hidden opacity-0 scale-95 transition-all duration-700 w-full h-full relative pt-4 md:pt-8">
+                    <!-- Botón de Volver - Mejorado con colores consonantes al diseño -->
                     <button onclick="closeStaff()"
-                        class="staff-clickable absolute top-6 right-10 text-violet-400 uppercase text-[10px] font-bold tracking-[0.3em] hover:text-white transition-colors flex items-center gap-2 z-10 font-bold">
+                        class="staff-clickable sticky md:absolute top-4 md:top-4 right-0 md:right-4 text-violet-300 uppercase text-[10px] font-bold tracking-[0.3em] hover:text-white transition-all duration-300 flex items-center gap-2 z-50 bg-violet-600/20 px-4 py-2 rounded-full backdrop-blur-xl border border-violet-400/40 hover:border-cyan-400 hover:bg-gradient-to-r hover:from-violet-500/30 hover:to-cyan-500/30 hover:shadow-lg hover:shadow-violet-500/20 mb-4 md:mb-0 ml-auto w-fit">
                         <span>←</span> Volver al Equipo
                     </button>
 
                     <div class="flex flex-col lg:flex-row gap-12 items-center lg:items-start pt-8 pb-4">
                         <!-- Imagen Grande -->
                         <div
-                            class="w-48 h-48 lg:w-64 lg:h-64 rounded-3xl overflow-hidden stats-glass-card p-1 shrink-0 relative">
+                            class="w-48 h-48 lg:w-64 lg:h-64 rounded-3xl overflow-hidden stats-glass-card p-1 shrink-0 relative mt-5">
                             <div id="staff-detail-gradient"
                                 class="w-full h-full rounded-2xl p-0.5 bg-gradient-to-br from-violet-500 to-cyan-500">
                                 <img id="staff-detail-img" src="" alt="Staff Large"
@@ -1017,6 +1018,8 @@
                 setTimeout(() => {
                     detailsWrapper.classList.remove('opacity-0', 'scale-95');
                     detailsWrapper.classList.add('opacity-100', 'scale-100');
+                    // FIX 4: Centrar el pilar expandido en la pantalla
+                    detailsWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 50);
             }, 600);
         }
@@ -1122,6 +1125,12 @@
                 setTimeout(() => {
                     detailView.classList.remove('opacity-0', 'scale-95');
                     detailView.classList.add('opacity-100', 'scale-100');
+                    // Posicionar el staff expandido justo debajo del navbar
+                    detailView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Ajustar 20px más abajo después del scroll
+                    setTimeout(() => {
+                        window.scrollBy({ top: -30, behavior: 'smooth' });
+                    }, 500);
                 }, 50);
             }, 650);
         }
