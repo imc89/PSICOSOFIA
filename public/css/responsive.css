@@ -244,6 +244,10 @@ body {
    6. OPINION SECTION MOBILE CENTERING
    ========================================== */
 @media (max-width: 768px) {
+    #opinion {
+        padding-bottom: 80px !important;
+    }
+
     #opinion .stats-glass-card {
         text-align: center !important;
     }
