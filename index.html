@@ -48,8 +48,14 @@
        NAVBAR (Navegación principal)
        Fijada en la parte superior con efecto glassmorphism.
     -->
-    <nav
-        class="fixed w-full z-50 px-4 md:px-8 py-4 md:py-6 flex flex-wrap justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5">
+    <nav id="main-nav"
+        class="fixed w-full z-50 px-4 md:px-8 py-4 md:py-6 flex flex-wrap justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5 transition-transform duration-300 will-change-transform">
+        <!-- Barra de progreso de scroll -->
+        <div id="scroll-progress-container" class="absolute bottom-0 left-0 w-full h-[2px] bg-white/5">
+            <div id="scroll-progress-bar"
+                class="h-full bg-gradient-to-r from-violet-600 to-cyan-400 w-0 transition-all duration-150 shadow-[0_0_10px_#7c3aed]">
+            </div>
+        </div>
         <div class="flex items-center gap-4 group">
             <div class="w-12 h-12 rounded-full p-1 bg-gradient-to-tr from-violet-600 to-cyan-400">
                 <img src="https://cdn.discordapp.com/icons/1233999708578516992/a_a0877c77afbe06c5beef87f4a45fabf7.gif"
@@ -1154,18 +1160,36 @@
 
         // --- SCROLL EFFECTS (Optimized with RAF) ---
         let scrollTicking = false;
-        const parallaxElements = document.querySelectorAll('.parallax-element');
-        const orbs = document.querySelectorAll('.orb');
+        let lastScrollTop = 0;
+        const scrollDelta = 10;
+        const nav = document.getElementById('main-nav');
+        const progressBar = document.getElementById('scroll-progress-bar');
         const sectionReveals = document.querySelectorAll('.section-reveal');
 
         window.addEventListener('scroll', () => {
             if (!scrollTicking) {
                 requestAnimationFrame(() => {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
                     const viewHeight = window.innerHeight * 0.85;
 
-                    // PARALLAX REMOVED FOR PERFORMANCE
-                    // Only keeping section reveal logic
+                    // Scroll Progress Bar Logic
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (scrollTop / height) * 100;
+                    if (progressBar) progressBar.style.width = scrolled + "%";
 
+                    // Nav Hide/Show Logic
+                    if (nav) {
+                        if (Math.abs(lastScrollTop - scrollTop) > scrollDelta) {
+                            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                                nav.classList.add('nav-hidden');
+                            } else {
+                                nav.classList.remove('nav-hidden');
+                            }
+                            lastScrollTop = scrollTop;
+                        }
+                    }
+
+                    // Section Reveal Logic
                     sectionReveals.forEach(sec => {
                         if (sec.getBoundingClientRect().top < viewHeight) {
                             sec.classList.add('visible');

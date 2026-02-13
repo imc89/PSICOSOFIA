@@ -617,3 +617,21 @@ a,
     font-family: inherit;
     font-size: inherit;
 }
+
+/* Navigation utility classes */
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+#scroll-progress-container {
+    pointer-events: none;
+}
+
+#particles-js {
+    pointer-events: none !important;
+    z-index: -1;
+}
+
+#particles-js canvas {
+    pointer-events: none !important;
+}
