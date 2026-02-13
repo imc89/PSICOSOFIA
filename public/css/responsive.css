@@ -186,14 +186,8 @@ body {
         font-size: 1.25rem !important;
     }
 
-    /* FIX 1: Usuarios online - display flex-column */
-    #online-counter {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        line-height: 1.5 !important;
-    }
+    /* El estilo del contador se maneja ahora mediante clases de Tailwind en el index.html
+       para asegurar que siempre quepa en una línea o se ajuste suavemente. */
 }
 
 /* ==========================================
