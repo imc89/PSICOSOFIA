@@ -1385,42 +1385,7 @@
 
         //  FIN LOGICA DE JUEGO
 
-        /* --- STOC ZOOM PREVENTION --- */
-        // Prevent default touch behavior for multi-finger gestures (pinch-zoom)
-        document.addEventListener('touchmove', function (event) {
-            if (event.scale !== 1 || event.touches.length > 1) {
-                event.preventDefault();
-            }
-        }, { passive: false });
-
-        // Prevent iOS specific gesture zoom
-        document.addEventListener('gesturestart', function (event) {
-            event.preventDefault();
-        });
-        document.addEventListener('gesturechange', function (event) {
-            event.preventDefault();
-        });
-        document.addEventListener('gestureend', function (event) {
-            event.preventDefault();
-        });
-
-        // Prevent double-tap to zoom
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Prevent typical keyboard zoom shortcuts
-        document.addEventListener('keydown', function (event) {
-            if ((event.ctrlKey || event.metaKey) &&
-                (event.key === '=' || event.key === '+' || event.key === '-')) {
-                event.preventDefault();
-            }
-        });
+        // --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) ---
 
         /* --- INTERACTION RESTRICTIONS (REDUCED FOR FLUIDITY) --- */
         // document.addEventListener('contextmenu', e => e.preventDefault());
