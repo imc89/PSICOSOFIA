@@ -42,6 +42,12 @@
     <div class="orb w-[500px] h-[500px] bg-violet-600/30 -top-20 -left-20"></div>
     <div class="orb w-[400px] h-[400px] bg-cyan-600/20 bottom-0 right-0" style="animation-delay: -5s;"></div>
     <div id="particles-js"></div>
+    <!-- Barra de progreso de scroll (Siempre visible) -->
+    <div id="scroll-progress-container" class="fixed top-0 left-0 w-full h-[2px] z-[60] bg-white/5">
+        <div id="scroll-progress-bar"
+            class="h-full bg-gradient-to-r from-violet-600 to-cyan-400 w-0 transition-all duration-150 shadow-[0_0_10px_#7c3aed]">
+        </div>
+    </div>
 
 
     <!-- 
@@ -49,52 +55,45 @@
        Fijada en la parte superior con efecto glassmorphism.
     -->
     <nav id="main-nav"
-        class="fixed w-full z-50 px-4 md:px-8 py-4 md:py-6 flex flex-wrap justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5 transition-transform duration-300 will-change-transform">
-        <!-- Barra de progreso de scroll -->
-        <div id="scroll-progress-container" class="absolute bottom-0 left-0 w-full h-[2px] bg-white/5">
-            <div id="scroll-progress-bar"
-                class="h-full bg-gradient-to-r from-violet-600 to-cyan-400 w-0 transition-all duration-150 shadow-[0_0_10px_#7c3aed]">
-            </div>
-        </div>
-        <div class="flex items-center gap-4 group">
-            <div class="w-12 h-12 rounded-full p-1 bg-gradient-to-tr from-violet-600 to-cyan-400">
+        class="fixed w-full z-50 px-4 md:px-8 py-4 md:py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-b border-white/5 transition-transform duration-300 will-change-transform">
+        <div class="flex items-center gap-2 md:gap-4 group shrink-0">
+            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full p-1 bg-gradient-to-tr from-violet-600 to-cyan-400">
                 <img src="https://cdn.discordapp.com/icons/1233999708578516992/a_a0877c77afbe06c5beef87f4a45fabf7.gif"
                     alt="Logo" class="w-full h-full object-cover rounded-full border-2 border-black">
             </div>
             <span
-                class="text-2xl font-black font-heading tracking-tighter uppercase italic group-hover:text-violet-400 transition-colors">Psicosofia</span>
+                class="hidden lg:block text-lg md:text-2xl font-black font-heading tracking-tighter uppercase italic group-hover:text-violet-400 transition-colors">Psicosofia</span>
         </div>
 
         <div
-            class="hidden lg:flex items-center space-x-12 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
-            <a href="#pilares" class="hover:text-white transition-all">Los Pilares</a>
-            <a href="#about" class="hover:text-white transition-all">El Server y su Equipo</a>
-            <a href="#ocio" class="hover:text-white transition-all">Momentos de Ocio</a>
-            <a href="#opinion" class="hover:text-white transition-all">Danos tu opinión</a>
+            class="hidden lg:flex items-center lg:space-x-4 xl:space-x-8 2xl:space-x-12 text-[10px] font-bold uppercase lg:tracking-widest xl:tracking-[0.3em] text-gray-400 shrink">
+            <a href="#pilares" class="hover:text-white transition-all whitespace-nowrap">Los Pilares</a>
+            <a href="#about" class="hover:text-white transition-all whitespace-nowrap">El Server y su Equipo</a>
+            <a href="#ocio" class="hover:text-white transition-all whitespace-nowrap">Momentos de Ocio</a>
+            <a href="#opinion" class="hover:text-white transition-all whitespace-nowrap">Danos tu opinión</a>
         </div>
 
-        <a href="https://disboard.org/es/server/join/1233999708578516992"
-            class="md:hidden discord-link bg-white text-black px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
-            Entrar
-        </a>
-
-        <div class="w-full md:w-auto flex justify-center md:items-center gap-6 mt-4 md:mt-0 order-last md:order-none">
+        <div class="flex items-center gap-2 md:gap-4 shrink-0">
             <button id="mobile-menu-btn" onclick="toggleMobileMenu()"
-                class="flex items-center justify-center hover:bg-violet-500/20 transition-all">
+                class="lg:hidden flex items-center justify-center hover:bg-violet-500/20 transition-all">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
             <div id="online-pill"
-                class="flex items-center bg-white/5 px-4 py-2 rounded-full border border-white/10 text-[11px] md:text-[11px] font-bold tracking-widest">
-                <div id="status-indicator" class="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-[0_0_10px_#22c55e]">
+                class="flex items-center bg-white/5 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 text-[10px] md:text-[11px] font-bold tracking-widest whitespace-nowrap">
+                <div id="status-indicator"
+                    class="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full mr-2 shadow-[0_0_10px_#22c55e]">
                 </div>
-                <span id="online-counter">USUARIOS ONLINE</span>
+                <span id="online-counter" class="flex items-center">
+                    <span id="online-count">0</span>
+                    <span class="ml-1 text-[8px] sm:text-[10px] md:text-[11px]">USUARIOS ONLINE</span>
+                </span>
             </div>
 
             <a href="https://disboard.org/es/server/join/1233999708578516992"
-                class="hidden md:block discord-link bg-white text-black px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:bg-violet-500 hover:text-white transition-all">
+                class="discord-link bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-4 md:px-8 py-2 md:py-3 rounded-full font-black text-[10px] md:text-xs uppercase tracking-widest border border-white/20 shadow-[0_0_15px_rgba(124,58,237,0.3)] hover:shadow-[0_0_20px_rgba(124,58,237,0.6)] hover:scale-105 active:scale-95 transition-all whitespace-nowrap">
                 Entrar
             </a>
         </div>
@@ -616,6 +615,7 @@
             get terminal() { return document.getElementById('terminal'); },
             get terminalInput() { return document.getElementById('terminal-input'); },
             get onlineCounter() { return document.getElementById('online-counter'); },
+            get onlineCount() { return document.getElementById('online-count'); },
             get totalHumans() { return document.getElementById('total-humans'); },
             get totalBots() { return document.getElementById('total-bots'); },
             get boostLvl() { return document.getElementById('boost-lvl'); },
@@ -656,8 +656,8 @@
                     if (discordResponse.ok) {
                         discordData = await discordResponse.json();
                         onlineNow = discordData.presence_count || 0;
-                        const onlineCounter = domCache.onlineCounter;
-                        if (onlineCounter) onlineCounter.innerText = `${onlineNow} USUARIOS ONLINE`;
+                        const onlineCountElem = domCache.onlineCount;
+                        if (onlineCountElem) onlineCountElem.innerText = onlineNow;
                     }
                 } catch (discordErr) {
                     console.warn("Fallo al conectar con Discord API (Widget):", discordErr);
@@ -678,7 +678,7 @@
                     if (totalHumans) totalHumans.innerText = stats.totalHumans || 0;
                     if (totalBots) totalBots.innerText = stats.totalBots || 0;
                     if (boostLvl) boostLvl.innerText = `LVL ${stats.boostLevel || 0}`;
-                    if (onlineNow) onlineNow.innerText = `${stats.onlineHumans || 0} USUARIOS ONLINE`;
+                    if (domCache.onlineCount) domCache.onlineCount.innerText = stats.onlineHumans || 0;
                     if (boostNumber) boostNumber.innerText = `NUM ${stats.boostNumber || 0}`;
 
                     const statusElem = domCache.dbStatus;
