@@ -494,19 +494,19 @@ a,
 #mobile-menu-btn {
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
     z-index: 100;
-    padding: 10px;
+    padding: 7px;
     background: rgba(124, 58, 237, 0.1);
     border: 1px solid rgba(124, 58, 237, 0.3);
-    border-radius: 12px;
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     transition: 0.3s;
 }
 
 #mobile-menu-btn span {
     display: block;
-    width: 18px;
+    width: 15px;
     height: 2px;
     background: #fff;
     border-radius: 2px;
@@ -604,24 +604,36 @@ a,
 }
 
 /* Discord Widget Modal */
+#discord-modal-backdrop {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+#discord-modal-backdrop.active {
+    visibility: visible;
+    opacity: 1;
+}
+
 #discord-widget-modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: translate(-50%, -45%) scale(0.95);
     z-index: 3000;
     opacity: 0;
     pointer-events: none;
-    display: none;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 30px rgba(124, 58, 237, 0.3);
-    border: 1px solid rgba(124, 58, 237, 0.2);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 30px rgba(124, 58, 237, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 480px;
+    visibility: hidden;
 }
 
 #discord-widget-modal.active {
-    display: flex;
-    flex-direction: column;
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
     transform: translate(-50%, -50%) scale(1);
 }
